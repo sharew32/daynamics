@@ -6,99 +6,186 @@
     <title>Pulley System Analysis</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            margin: 20px;
+            margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
         }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 20px 0;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
         .given {
-            background-color: #e7f3fe;
-            padding: 15px;
-            border-left: 5px solid #2196F3;
-            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
         }
+
         .calculation {
-            background-color: #e8f5e9;
-            padding: 15px;
-            border-left: 5px solid #4CAF50;
-            margin-bottom: 20px;
+            border-left: 5px solid #2ecc71;
         }
+
         .result {
-            background-color: #fff3e0;
-            padding: 15px;
-            border-left: 5px solid #FF9800;
-            font-weight: bold;
+            border-left: 5px solid #e74c3c;
         }
+
         .equation {
-            font-family: monospace;
+            font-family: 'Courier New', Courier, monospace;
             font-size: 1.1em;
-            color: #d32f2f;
+            color: #c0392b;
+            background-color: #f8f9fa;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 5px 0;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
+
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
         }
+
         th {
             background-color: #3498db;
             color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button:hover {
+            background-color: #2980b9;
+        }
+
+        .direction {
+            font-style: italic;
+            color: #7f8c8d;
         }
     </style>
 </head>
 <body>
-    <img src="image6.jpeg" alt="diagram"><br>
-    <div class="given">
+    <h1>Pulley System Analysis</h1>
+
+    <div class="diagram-container">
+        <img src="image6.jpeg" alt="Pulley System Diagram">
+    </div>
+
+    <div class="section given">
         <h2>Given Data</h2>
         <ul>
             <li><strong>Block B:</strong> 
-                <span class="equation">v_B = +1.2 m/s (↓)</span>, 
-                <span class="equation">a_B = -2 m/s² (↑)</span>
+                <span class="equation">v<sub>B</sub> = +1.2 m/s</span> <span class="direction">(downward)</span>, 
+                <span class="equation">a<sub>B</sub> = -2 m/s²</span> <span class="direction">(upward)</span>
             </li>
-            <li><strong>Constraint:</strong> 
-                <span class="equation">3s_B + 2s_A = constant</span>
+            <li><strong>Constraint Equation:</strong> 
+                <span class="equation">3s<sub>B</sub> + 2s<sub>A</sub> = constant</span>
             </li>
         </ul>
     </div>
 
-    <div class="calculation">
+    <div class="section calculation">
         <h2>Step 1: Velocity Relationship</h2>
-        <p class="equation">3v_B + 2v_A = 0 ⇒ v_A = -1.5 v_B</p>
-        <p class="equation">v_A = -1.5 × (+1.2) = -1.8 m/s (←)</p>
+        <p>Differentiating the constraint equation with respect to time:</p>
+        <p class="equation">3v<sub>B</sub> + 2v<sub>A</sub> = 0 ⇒ v<sub>A</sub> = -1.5 v<sub>B</sub></p>
+        <p>Substituting the known value:</p>
+        <p class="equation">v<sub>A</sub> = -1.5 × (+1.2) = -1.8 m/s</p>
+        <p class="direction">(negative sign indicates leftward direction)</p>
     </div>
 
-    <div class="calculation">
+    <div class="section calculation">
         <h2>Step 2: Acceleration Relationship</h2>
-        <p class="equation">3a_B + 2a_A = 0 ⇒ a_A = -1.5 a_B</p>
-        <p class="equation">a_A = -1.5 × (-2) = +3.0 m/s² (→)</p>
+        <p>Differentiating the velocity relationship with respect to time:</p>
+        <p class="equation">3a<sub>B</sub> + 2a<sub>A</sub> = 0 ⇒ a<sub>A</sub> = -1.5 a<sub>B</sub></p>
+        <p>Substituting the known value:</p>
+        <p class="equation">a<sub>A</sub> = -1.5 × (-2) = +3.0 m/s²</p>
+        <p class="direction">(positive sign indicates rightward direction)</p>
     </div>
 
-    <div class="result">
+    <div class="section result">
         <h2>Final Results</h2>
         <table>
-            <tr>
-                <th>Quantity</th>
-                <th>Block A</th>
-                <th>Block B</th>
-            </tr>
-            <tr>
-                <td>Velocity</td>
-                <td>-1.8 m/s (←)</td>
-                <td>+1.2 m/s (↓)</td>
-            </tr>
-            <tr>
-                <td>Acceleration</td>
-                <td>+3.0 m/s² (→)</td>
-                <td>-2 m/s² (↑)</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Block A</th>
+                    <th>Block B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Velocity</td>
+                    <td>-1.8 m/s (←)</td>
+                    <td>+1.2 m/s (↓)</td>
+                </tr>
+                <tr>
+                    <td>Acceleration</td>
+                    <td>+3.0 m/s² (→)</td>
+                    <td>-2 m/s² (↑)</td>
+                </tr>
+            </tbody>
         </table>
     </div>
-    <a href="https://sharew32.github.io/daynamics/index.html" target="_blank" rel="noopener">Go to home</a><br>
-    <a href="https://sharew32.github.io/daynamics/relativeVelocity.html" target="_blank" rel="noopener">Back</a>
+
+    <div class="navigation">
+        <a href="https://sharew32.github.io/daynamics/relativeVelocity.html" class="nav-button">Back</a>
+        <a href="https://sharew32.github.io/daynamics/index.html" class="nav-button">Go to Home</a>
+    </div>
 </body>
 </html>
