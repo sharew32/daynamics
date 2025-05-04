@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulley System Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .given {
+            background-color: #e7f3fe;
+            padding: 15px;
+            border-left: 5px solid #2196F3;
+            margin-bottom: 20px;
+        }
+        .calculation {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 5px solid #4CAF50;
+            margin-bottom: 20px;
+        }
+        .result {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-left: 5px solid #FF9800;
+            font-weight: bold;
+        }
+        .equation {
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #d32f2f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="given">
+        <h2>Given Data</h2>
+        <ul>
+            <li><strong>Block B:</strong> 
+                <span class="equation">v_B = +1.2 m/s (↓)</span>, 
+                <span class="equation">a_B = -2 m/s² (↑)</span>
+            </li>
+            <li><strong>Constraint:</strong> 
+                <span class="equation">3s_B + 2s_A = constant</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 1: Velocity Relationship</h2>
+        <p class="equation">3v_B + 2v_A = 0 ⇒ v_A = -1.5 v_B</p>
+        <p class="equation">v_A = -1.5 × (+1.2) = -1.8 m/s (←)</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 2: Acceleration Relationship</h2>
+        <p class="equation">3a_B + 2a_A = 0 ⇒ a_A = -1.5 a_B</p>
+        <p class="equation">a_A = -1.5 × (-2) = +3.0 m/s² (→)</p>
+    </div>
+
+    <div class="result">
+        <h2>Final Results</h2>
+        <table>
+            <tr>
+                <th>Quantity</th>
+                <th>Block A</th>
+                <th>Block B</th>
+            </tr>
+            <tr>
+                <td>Velocity</td>
+                <td>-1.8 m/s (←)</td>
+                <td>+1.2 m/s (↓)</td>
+            </tr>
+            <tr>
+                <td>Acceleration</td>
+                <td>+3.0 m/s² (→)</td>
+                <td>-2 m/s² (↑)</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
