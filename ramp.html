@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Acceleration Problem Solution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .given {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .solution {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .answer {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .formula {
+            font-family: "Courier New", monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+        }
+        .summary {
+            background-color: #eaf7ea;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .problem-image {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .problem-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .image-caption {
+            font-style: italic;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Car Acceleration Problem Solution</h1>
+
+    <div class="problem-image">
+        <!-- Replace 'image.png' with your actual image file path -->
+        <img src="image.png.jpeg" alt="Car acceleration problem diagram">
+        <div class="image-caption">Problem diagram showing points A, B, and C</div>
+    </div>
+
+    <div class="given">
+        <h2>Given Information:</h2>
+        <ul>
+            <li><strong>Initial speed at point A:</strong> v<sub>A</sub> = 60 mi/hr = 88 ft/sec</li>
+            <li><strong>Deceleration from A to B:</strong> a<sub>t(A→B)</sub> = -7 ft/sec² (constant)</li>
+            <li><strong>Distance A to B:</strong> d<sub>A→B</sub> = 300 ft</li>
+            <li><strong>At point B:</strong> Car enters circular ramp with radius ρ = 200 ft</li>
+            <li><strong>Deceleration after B:</strong> a<sub>t(B→C)</sub> = -3 ft/sec²</li>
+            <li><strong>Point C:</strong> End of 90° turn (quarter-circle), arc length ≈ 314.16 ft</li>
+        </ul>
+    </div>
+
+    <div class="solution">
+        <h2>(a) Total acceleration just before B:</h2>
+        <p><strong>Path:</strong> Straight (a<sub>r</sub> = 0)</p>
+        <p><strong>Only tangential deceleration:</strong></p>
+        <p class="formula">a = |a<sub>t</sub>| = 7 ft/sec²</p>
+        <p class="answer">Answer: 7 ft/sec²</p>
+    </div>
+
+    <div class="solution">
+        <h2>(b) Total acceleration just after B:</h2>
+        <p><strong>1. Find speed at B (v<sub>B</sub>):</strong></p>
+        <p class="formula">v<sub>B</sub>² = v<sub>A</sub>² + 2a<sub>t</sub>d<sub>A→B</sub> = 88² + 2(-7)(300) = 3544 ft²/sec²</p>
+        <p class="formula">v<sub>B</sub> = √3544 ≈ 59.53 ft/sec</p>
+        
+        <p><strong>2. Radial acceleration at B:</strong></p>
+        <p class="formula">a<sub>r</sub> = v<sub>B</sub>²/ρ = 3544/200 = 17.72 ft/sec²</p>
+        
+        <p><strong>3. Tangential acceleration:</strong></p>
+        <p class="formula">a<sub>t</sub> = -3 ft/sec²</p>
+        
+        <p><strong>4. Total acceleration:</strong></p>
+        <p class="formula">a = √(a<sub>t</sub>² + a<sub>r</sub>²) = √(9 + 314) ≈ 17.97 ft/sec²</p>
+        <p class="answer">Answer: 17.97 ft/sec²</p>
+    </div>
+
+    <div class="solution">
+        <h2>(c) Total acceleration at C:</h2>
+        <p><strong>1. Find speed at C (v<sub>C</sub>):</strong></p>
+        <p class="formula">v<sub>C</sub>² = v<sub>B</sub>² + 2a<sub>t</sub>s<sub>B→C</sub> = 3544 + 2(-3)(314.16) = 1659 ft²/sec²</p>
+        <p class="formula">v<sub>C</sub> = √1659 ≈ 40.73 ft/sec</p>
+        
+        <p><strong>2. Radial acceleration at C:</strong></p>
+        <p class="formula">a<sub>r</sub> = v<sub>C</sub>²/ρ = 1659/200 = 8.30 ft/sec²</p>
+        
+        <p><strong>3. Total acceleration:</strong></p>
+        <p class="formula">a = √(a<sub>t</sub>² + a<sub>r</sub>²) = √(9 + 68.89) ≈ 8.83 ft/sec²</p>
+        <p class="answer">Answer: 8.83 ft/sec²</p>
+    </div>
+
+    <div class="summary">
+        <h2>Summary of Results:</h2>
+        <ul>
+            <li>(a) Just before B: 7 ft/sec²</li>
+            <li>(b) Just after B: 17.97 ft/sec²</li>
+            <li>(c) At C: 8.83 ft/sec²</li>
+        </ul>
+    </div>
+</body>
+</html>
