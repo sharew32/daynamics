@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relative Motion Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .given-data {
+            background-color: #e8f4fc;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .calculation {
+            background-color: #f0f7f0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #27ae60;
+            margin: 15px 0;
+        }
+        .result {
+            background-color: #fdebd0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 5px solid #e67e22;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .vector {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .unit {
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .note {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relative Motion Analysis: Car A vs. Car B</h1>
+    
+    <div class="given-data">
+        <h2>Given Data</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Car A (Curved Path)</th>
+                <th>Car B (Straight Path)</th>
+            </tr>
+            <tr>
+                <td>Speed</td>
+                <td>10 <span class="unit">m/s</span></td>
+                <td>18.5 <span class="unit">m/s</span></td>
+            </tr>
+            <tr>
+                <td>Acceleration</td>
+                <td>5 <span class="unit">m/s²</span> (tangential)</td>
+                <td>2 <span class="unit">m/s²</span></td>
+            </tr>
+            <tr>
+                <td>Path Geometry</td>
+                <td>Circular path (radius = 100 <span class="unit">m</span>)<br>
+                    Positioned at 45° from reference line</td>
+                <td>Straight path parallel to reference line<br>
+                    100 <span class="unit">m</span> from reference line</td>
+            </tr>
+        </table>
+    </div>
 
+    <div class="diagram">
+        <h3>Schematic Diagram</h3>
+        <p>[Imagine a diagram here showing:]</p>
+        <ul>
+            <li>Reference line (x-axis)</li>
+            <li>Car B moving parallel to reference line at y = 100m</li>
+            <li>Car A on circular path at 45° angle, 100m from center</li>
+        </ul>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 1: Coordinate System Setup</h2>
+        <p>We define our coordinate system with:</p>
+        <ul>
+            <li>Reference line as x-axis</li>
+            <li>Car B moving along x-direction at y = 100m</li>
+            <li>Car A positioned at (70.71m, 70.71m) [100m at 45°]</li>
+        </ul>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 2: Velocity Analysis</h2>
+        <h3>Car A Velocity Components</h3>
+        <p>Tangential velocity at 45°:</p>
+        <p>v<sub>A</sub> = 10cos45° <span class="vector">î</span> + 10sin45° <span class="vector">ĵ</span> = 7.07 <span class="vector">î</span> + 7.07 <span class="vector">ĵ</span> m/s</p>
+        
+        <h3>Car B Velocity Components</h3>
+        <p>v<sub>B</sub> = 18.5 <span class="vector">î</span> + 0 <span class="vector">ĵ</span> m/s</p>
+        
+        <h3>Relative Velocity</h3>
+        <p>v<sub>A/B</sub> = v<sub>A</sub> - v<sub>B</sub> = (7.07 - 18.5) <span class="vector">î</span> + 7.07 <span class="vector">ĵ</span> = -11.43 <span class="vector">î</span> + 7.07 <span class="vector">ĵ</span> m/s</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 3: Acceleration Analysis</h2>
+        <h3>Car A Acceleration Components</h3>
+        <p>Tangential acceleration: 5 m/s² at 45°</p>
+        <p>Normal acceleration: v²/ρ = 1 m/s² toward center (at -135°)</p>
+        <p>Total acceleration:</p>
+        <p>a<sub>A</sub> = (5cos45° - 1cos45°) <span class="vector">î</span> + (5sin45° - 1sin45°) <span class="vector">ĵ</span> = 2.83 <span class="vector">î</span> + 2.83 <span class="vector">ĵ</span> m/s²</p>
+        
+        <h3>Car B Acceleration Components</h3>
+        <p>a<sub>B</sub> = 2 <span class="vector">î</span> + 0 <span class="vector">ĵ</span> m/s²</p>
+        
+        <h3>Relative Acceleration</h3>
+        <p>a<sub>A/B</sub> = a<sub>A</sub> - a<sub>B</sub> = (2.83 - 2) <span class="vector">î</span> + 2.83 <span class="vector">ĵ</span> = 0.83 <span class="vector">î</span> + 2.83 <span class="vector">ĵ</span> m/s²</p>
+    </div>
+
+    <div class="result">
+        <h2>Final Results</h2>
+        <table>
+            <tr>
+                <th>Quantity</th>
+                <th>Value</th>
+                <th>Components</th>
+            </tr>
+            <tr>
+                <td>Relative Velocity (v<sub>A/B</sub>)</td>
+                <td>13.4 m/s</td>
+                <td>-11.43 <span class="vector">î</span> + 7.07 <span class="vector">ĵ</span> m/s</td>
+            </tr>
+            <tr>
+                <td>Relative Acceleration (a<sub>A/B</sub>)</td>
+                <td>2.95 m/s²</td>
+                <td>0.83 <span class="vector">î</span> + 2.83 <span class="vector">ĵ</span> m/s²</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="note">
+        <p>Note: This solution assumes the radius of curvature for Car A's path is 100m and that Car B is moving parallel to the reference line at a perpendicular distance of 100m. The positions and angles are calculated based on the given 45° orientation of Car A.</p>
+    </div>
+</body>
+</html>
