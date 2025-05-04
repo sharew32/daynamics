@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toboggan Acceleration Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 35px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .given-data {
+            background-color: #e8f4fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .calculation {
+            background-color: #fef9e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .result {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .equation {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .vector {
+            font-weight: bold;
+            color: #c0392b;
+        }
+        .unit {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            text-align: left;
+            padding: 12px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .note {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 20px;
+            padding: 10px;
+            border-left: 3px solid #bdc3c7;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Toboggan Acceleration Analysis</h1><br>
+    <img src="image2.jpeg" alt="diagram">
+    <div class="given-data">
+        <h2>Given Data</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Path equation</td>
+                <td><span class="equation">y = 0.01x²</span> (parabolic curve)</td>
+            </tr>
+            <tr>
+                <td>Speed at point A (v<sub>A</sub>)</td>
+                <td>10 <span class="unit">m/s</span></td>
+            </tr>
+            <tr>
+                <td>Tangential acceleration (a<sub>t</sub>)</td>
+                <td>3 <span class="unit">m/s²</span> (increasing speed)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="diagram">
+        <h3>Schematic Diagram</h3>
+        <p>[Toboggan moving along parabolic path y = 0.01x² at point A]</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 1: Find Radius of Curvature (ρ)</h2>
+        <p>For a curve y = f(x), the radius of curvature is:</p>
+        <div class="equation">ρ = [1 + (dy/dx)²]<sup>3/2</sup> / |d²y/dx²|</div>
+        <p>First derivative:</p>
+        <div class="equation">dy/dx = 0.02x</div>
+        <p>Second derivative:</p>
+        <div class="equation">d²y/dx² = 0.02</div>
+        <p>At point A (x-coordinate unknown), we express ρ in terms of x:</p>
+        <div class="equation">ρ = [1 + (0.02x)²]<sup>3/2</sup> / 0.02</div>
+        <p class="note">Note: Without x-coordinate at point A, we cannot compute a numerical value for ρ.</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 2: Calculate Normal Acceleration (a<sub>n</sub>)</h2>
+        <div class="equation">a<sub>n</sub> = v²/ρ = 100/ρ <span class="unit">m/s²</span></div>
+        <p class="note">Requires ρ value from Step 1.</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 3: Total Acceleration</h2>
+        <p>Combining tangential and normal components:</p>
+        <div class="equation">a = √(a<sub>t</sub>² + a<sub>n</sub>²) = √(9 + (100/ρ)²) <span class="unit">m/s²</span></div>
+    </div>
+
+    <div class="result">
+        <h2>Final Result</h2>
+        <p>The magnitude of acceleration at point A is:</p>
+        <div class="equation">a = √[9 + (100/ρ)²] <span class="unit">m/s²</span></div>
+        <p>where ρ = [1 + (0.02x)²]<sup>3/2</sup> / 0.02</p>
+        
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Expression</th>
+            </tr>
+            <tr>
+                <td>Tangential (a<sub>t</sub>)</td>
+                <td>3.0 <span class="unit">m/s²</span></td>
+            </tr>
+            <tr>
+                <td>Normal (a<sub>n</sub>)</td>
+                <td>100/ρ <span class="unit">m/s²</span></td>
+            </tr>
+            <tr>
+                <td>Total (a)</td>
+                <td>√(9 + (100/ρ)²) <span class="unit">m/s²</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="note">
+        <p><strong>Note:</strong> The exact numerical value cannot be determined without the x-coordinate of point A on the parabola. The solution is presented in terms of the general position (x). If point A is at the vertex (x=0), then ρ = 50 m and a = 5 m/s².</p>
+    </div>
+    <a href="https://sharew32.github.io/daynamics/ramp.html" target="_blank" rel="noopener">next</a><br>
+    <a href="https://sharew32.github.io/daynamics/Projectile.html" target="_blank" rel="noopener">Back</a>
+</body>
+</html>

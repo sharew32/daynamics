@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projectile Motion Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 25px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 35px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        .given-data {
+            background-color: #e8f4fc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .calculation {
+            background-color: #fef9e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .result {
+            background-color: #eaf2f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .equation {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .vector {
+            font-weight: bold;
+            color: #c0392b;
+        }
+        .unit {
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            text-align: left;
+            padding: 12px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .note {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 20px;
+            padding: 10px;
+            border-left: 3px solid #bdc3c7;
+        }
+        .diagram {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Projectile Motion Analysis</h1><br>
+    <img src="image1.jpeg" alt="Car acceleration problem diagram">
+    <div class="given-data">
+        <h2>Given Data</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Initial velocity (v₀)</td>
+                <td>120 <span class="unit">m/s</span></td>
+            </tr>
+            <tr>
+                <td>Launch angle (θ)</td>
+                <td>40°</td>
+            </tr>
+            <tr>
+                <td>Slope angle</td>
+                <td>20°</td>
+            </tr>
+            <tr>
+                <td>Vertical drop (A to B)</td>
+                <td>800 <span class="unit">m</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="diagram">
+        <h3>Schematic Diagram</h3>
+        <p>[Projectile launched from A at 40°, impacting slope at 20° with 800m vertical drop]</p>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 1: Establish Coordinate System</h2>
+        <p>Place point A at origin (0,0). The slope equation is:</p>
+        <div class="equation">y = -x tan(20°)</div>
+        <p>At impact point B, vertical drop is 800m:</p>
+        <div class="equation">y = -800 = -s sin(20°) ⇒ s = 800 / sin(20°) ≈ 2338.5 m</div>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 2: Projectile Motion Equations</h2>
+        <p>Horizontal position:</p>
+        <div class="equation">x(t) = v₀ cosθ t = 120 cos(40°) t ≈ 91.92 t</div>
+        <p>Vertical position:</p>
+        <div class="equation">y(t) = v₀ sinθ t - ½gt² = 120 sin(40°) t - 4.905 t² ≈ 77.14 t - 4.905 t²</div>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 3: Solve for Time of Flight</h2>
+        <p>Projectile hits slope when:</p>
+        <div class="equation">y(t) = -x(t) tan(20°)</div>
+        <div class="equation">77.14 t - 4.905 t² = -91.92 t (0.364)</div>
+        <div class="equation">77.14 t + 33.46 t - 4.905 t² = 0 ⇒ 110.6 t - 4.905 t² = 0</div>
+        <div class="equation">t = 110.6 / 4.905 ≈ 22.55 <span class="unit">s</span></div>
+    </div>
+
+    <div class="calculation">
+        <h2>Step 4: Find Slant Distance (s)</h2>
+        <p>Horizontal distance at impact:</p>
+        <div class="equation">x = 91.92 × 22.55 ≈ 2072.5 <span class="unit">m</span></div>
+        <p>Slant distance along slope:</p>
+        <div class="equation">s = x / cos(20°) ≈ 2072.5 / 0.9397 ≈ 2205.5 <span class="unit">m</span></div>
+    </div>
+
+    <div class="result">
+        <h2>Final Results</h2>
+        <table>
+            <tr>
+                <th>Quantity</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Time of flight (t)</td>
+                <td>22.55 <span class="unit">seconds</span></td>
+            </tr>
+            <tr>
+                <td>Slant distance (s)</td>
+                <td>2205.5 <span class="unit">meters</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="note">
+        <p><strong>Note:</strong> The solution assumes the 800m vertical drop corresponds to the direct vertical distance between points A and B. If the figure shows a different configuration (e.g., horizontal distance), the calculations would need adjustment.</p>
+    </div>
+    <a href="https://sharew32.github.io/daynamics/toboggan.html" target="_blank" rel="noopener">next</a>
+</body>
+</html>
