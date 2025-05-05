@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Mechanics Problem Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .question {
+            background-color: #fff8e1;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .problem {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .given {
+            background-color: #e8f4fc;
+            padding: 10px 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .required {
+            background-color: #e8fcf5;
+            padding: 10px 15px;
+            border-left: 4px solid #2ecc71;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .solution {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .important {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .formula {
+            font-family: "Courier New", monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quantum Mechanics Problem Solutions</h1>
+        
+        <!-- Problem 1 -->
+        <div class="problem">
+            <div class="question">
+                1. Calculate the de Broglie wavelength for:<br>
+                a) A proton (mass = 1.67×10<sup>-27</sup> kg) moving at 2.0×10<sup>6</sup> m/s.<br>
+                b) An electron with a kinetic energy of 100 eV.
+            </div>
+            
+            <div class="given">
+                <h3>Given:</h3>
+                <p>a) Proton mass (m) = 1.67×10<sup>-27</sup> kg, velocity (v) = 2.0×10<sup>6</sup> m/s</p>
+                <p>b) Electron with kinetic energy = 100 eV</p>
+            </div>
+            
+            <div class="required">
+                <h3>Required:</h3>
+                <p>Calculate the de Broglie wavelength for both cases</p>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution:</h3>
+                
+                <h4>Part a) Proton</h4>
+                <p>De Broglie wavelength formula: <span class="formula">λ = h/p = h/(mv)</span></p>
+                <p>Planck's constant (h) = 6.626×10<sup>-34</sup> J·s</p>
+                <p>λ = (6.626×10<sup>-34</sup>) / (1.67×10<sup>-27</sup> × 2.0×10<sup>6</sup>)</p>
+                <p>λ = (6.626×10<sup>-34</sup>) / (3.34×10<sup>-21</sup>)</p>
+                <p>λ = 1.984×10<sup>-13</sup> m ≈ <span class="important">0.1984 pm</span> (picometers)</p>
+                
+                <h4>Part b) Electron</h4>
+                <p>First convert 100 eV to joules:</p>
+                <p>1 eV = 1.602×10<sup>-19</sup> J ⇒ 100 eV = 1.602×10<sup>-17</sup> J</p>
+                <p>Kinetic energy K = ½mv² ⇒ v = √(2K/m)</p>
+                <p>Electron mass (m) = 9.11×10<sup>-31</sup> kg</p>
+                <p>v = √(2 × 1.602×10<sup>-17</sup> / 9.11×10<sup>-31</sup>) = √(3.517×10<sup>13</sup>) ≈ 5.93×10<sup>6</sup> m/s</p>
+                <p>Now calculate λ:</p>
+                <p>λ = h/(mv) = (6.626×10<sup>-34</sup>) / (9.11×10<sup>-31</sup> × 5.93×10<sup>6</sup>)</p>
+                <p>λ = (6.626×10<sup>-34</sup>) / (5.40×10<sup>-24</sup>) ≈ 1.227×10<sup>-10</sup> m ≈ <span class="important">0.1227 nm</span> (nanometers)</p>
+            </div>
+        </div>
+        
+        <!-- Problem 2 -->
+        <div class="problem">
+            <div class="question">
+                2. A matter wave is associated with an electron moving at 1.5×10<sup>6</sup> m/s.<br>
+                a) Calculate the phase velocity of the de Broglie wave.<br>
+                b) Show that the group velocity equals the electron's velocity.<br>
+                (Hint: Use relativistic energy-momentum relations if needed.)
+            </div>
+            
+            <div class="given">
+                <h3>Given:</h3>
+                <p>Electron moving at v = 1.5×10<sup>6</sup> m/s</p>
+            </div>
+            
+            <div class="required">
+                <h3>Required:</h3>
+                <p>a) Phase velocity of de Broglie wave</p>
+                <p>b) Show group velocity equals electron's velocity</p>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution:</h3>
+                
+                <h4>Part a) Phase Velocity</h4>
+                <p>Phase velocity v<sub>p</sub> = ω/k = E/p</p>
+                <p>For non-relativistic case:</p>
+                <p>E = ½mv², p = mv</p>
+                <p>v<sub>p</sub> = (½mv²)/(mv) = v/2</p>
+                <p>v<sub>p</sub> = (1.5×10<sup>6</sup>)/2 = <span class="important">0.75×10<sup>6</sup> m/s</span></p>
+                
+                <h4>Part b) Group Velocity</h4>
+                <p>Group velocity v<sub>g</sub> = dω/dk = dE/dp</p>
+                <p>For non-relativistic case: E = p²/(2m)</p>
+                <p>v<sub>g</sub> = dE/dp = (2p)/(2m) = p/m = v</p>
+                <p>Thus, v<sub>g</sub> = v = <span class="important">1.5×10<sup>6</sup> m/s</span>, which equals the electron's velocity</p>
+            </div>
+        </div>
+        
+        <!-- Problem 3 -->
+        <div class="problem">
+            <div class="question">
+                3. An electron is accelerated through a potential difference of 1 MeV (rest mass energy m<sub>e</sub>c² = 0.511 MeV).<br>
+                a) Calculate the electron's relativistic momentum (p).<br>
+                b) Determine its de Broglie wavelength (λ).
+            </div>
+            
+            <div class="given">
+                <h3>Given:</h3>
+                <p>Electron accelerated through 1 MeV potential difference</p>
+                <p>Electron rest mass energy m<sub>e</sub>c² = 0.511 MeV</p>
+            </div>
+            
+            <div class="required">
+                <h3>Required:</h3>
+                <p>a) Relativistic momentum (p)</p>
+                <p>b) De Broglie wavelength (λ)</p>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution:</h3>
+                
+                <h4>Part a) Relativistic Momentum</h4>
+                <p>Total energy E = rest energy + kinetic energy = 0.511 MeV + 1 MeV = 1.511 MeV</p>
+                <p>Relativistic energy-momentum relation: E² = (pc)² + (m<sub>e</sub>c²)²</p>
+                <p>(1.511)² = (pc)² + (0.511)² ⇒ 2.283 = (pc)² + 0.261</p>
+                <p>(pc)² = 2.283 - 0.261 = 2.022 ⇒ pc = √2.022 ≈ 1.422 MeV</p>
+                <p>p = 1.422 MeV/c ≈ <span class="important">1.422 MeV/c</span></p>
+                <p>In SI units: 1 MeV/c = 5.34×10<sup>-22</sup> kg·m/s</p>
+                <p>p ≈ 1.422 × 5.34×10<sup>-22</sup> ≈ 7.59×10<sup>-22</sup> kg·m/s</p>
+                
+                <h4>Part b) De Broglie Wavelength</h4>
+                <p>λ = h/p</p>
+                <p>Using p in SI units: p ≈ 7.59×10<sup>-22</sup> kg·m/s</p>
+                <p>λ = (6.626×10<sup>-34</sup>)/(7.59×10<sup>-22</sup>) ≈ 8.73×10<sup>-13</sup> m ≈ <span class="important">0.873 fm</span> (femtometers)</p>
+            </div>
+        </div>
+        
+        <!-- Problem 4 -->
+        <div class="problem">
+            <div class="question">
+                4. A proton (rest mass m<sub>p</sub>=938 MeV/c²) has a kinetic energy of 500 MeV. Calculate its phase velocity.
+            </div>
+            
+            <div class="given">
+                <h3>Given:</h3>
+                <p>Proton rest mass m<sub>p</sub> = 938 MeV/c²</p>
+                <p>Kinetic energy = 500 MeV</p>
+            </div>
+            
+            <div class="required">
+                <h3>Required:</h3>
+                <p>Calculate phase velocity</p>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution:</h3>
+                <p>Phase velocity v<sub>p</sub> = ω/k = E/p</p>
+                <p>Total energy E = rest energy + kinetic energy = 938 + 500 = 1438 MeV</p>
+                <p>Using relativistic energy-momentum relation:</p>
+                <p>E² = (pc)² + (m<sub>p</sub>c²)² ⇒ (1438)² = (pc)² + (938)²</p>
+                <p>2,067,844 = (pc)² + 879,844 ⇒ (pc)² = 1,188,000 ⇒ pc ≈ 1090 MeV</p>
+                <p>v<sub>p</sub> = E/p = (1438 MeV)/(1090 MeV/c) ≈ 1.319c ≈ <span class="important">1.319c</span> (where c is speed of light)</p>
+                <p>Note: Phase velocity can exceed speed of light as it doesn't carry information</p>
+            </div>
+        </div>
+        
+        <!-- Problem 5 -->
+        <div class="problem">
+            <div class="question">
+                5. A neutron (m<sub>n</sub> ≈ 1.67×10<sup>-27</sup> kg) is confined in a nucleus (Δx ≈ 10<sup>-15</sup> m). Calculate its momentum uncertainty and kinetic energy.
+            </div>
+            
+            <div class="given">
+                <h3>Given:</h3>
+                <p>Neutron mass m<sub>n</sub> ≈ 1.67×10<sup>-27</sup> kg</p>
+                <p>Confinement Δx ≈ 10<sup>-15</sup> m (nucleus size)</p>
+            </div>
+            
+            <div class="required">
+                <h3>Required:</h3>
+                <p>Momentum uncertainty and kinetic energy</p>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution:</h3>
+                <p>Heisenberg Uncertainty Principle: Δx·Δp ≥ ħ/2</p>
+                <p>ħ = h/(2π) ≈ 1.055×10<sup>-34</sup> J·s</p>
+                <p>Minimum uncertainty Δp ≈ ħ/(2Δx) = (1.055×10<sup>-34</sup>)/(2×10<sup>-15</sup>) ≈ 5.275×10<sup>-20</sup> kg·m/s</p>
+                <p><span class="important">Momentum uncertainty ≈ 5.28×10<sup>-20</sup> kg·m/s</span></p>
+                
+                <p>For kinetic energy, assuming this is the minimum momentum:</p>
+                <p>K = p²/(2m) = (5.275×10<sup>-20</sup>)²/(2×1.67×10<sup>-27</sup>)</p>
+                <p>K = 2.783×10<sup>-39</sup>/3.34×10<sup>-27</sup> ≈ 8.33×10<sup>-13</sup> J</p>
+                <p>Convert to eV: 1 eV = 1.602×10<sup>-19</sup> J ⇒ K ≈ (8.33×10<sup>-13</sup>)/(1.602×10<sup>-19</sup>) ≈ <span class="important">5.20 MeV</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
