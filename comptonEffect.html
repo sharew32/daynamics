@@ -456,6 +456,14 @@
     <footer>
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
+<div class="newsletter-box">
+  <h3>Get the full derivation PDF</h3>
+  <form id="email-capture">
+    <input type="email" placeholder="Your email" required>
+    <button type="submit">Send Me the PDF</button>
+  </form>
+</div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -549,7 +557,13 @@
             window.addEventListener('load', () => setTimeout(sendAccessNotification, 1500));
         }
     })();
-</script>
 
+  document.getElementById('email-capture').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userEmail = e.target.querySelector('input').value;
+    // Send to your backend/EmailJS
+    console.log('User provided email:', userEmail);
+  });
+</script>
 </body>
 </html>
