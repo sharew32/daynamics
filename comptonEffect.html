@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <!-- EmailJS for notifications -->
+    <!-- EmailJS for notifications (ONLY LOAD ONCE) -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     
     <style>
@@ -43,409 +44,57 @@
             font-weight: 700;
         }
         
-        h2 {
-            color: var(--secondary);
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            margin-top: 50px;
-            font-weight: 600;
-        }
-        
-        h3 {
-            color: var(--accent);
-            margin-top: 30px;
-            font-weight: 500;
-        }
-        
-        .section {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 35px;
-            border: 1px solid #eee;
-        }
-        
-        .equation {
-            background: var(--light);
-            padding: 15px 20px;
-            border-left: 4px solid var(--primary);
-            margin: 25px 0;
-            overflow-x: auto;
-            font-size: 1.15em;
-            border-radius: 4px;
-        }
-        
-        .numbered-eq {
-            counter-increment: equation;
-            position: relative;
-            padding-left: 70px;
-        }
-        
-        .numbered-eq::before {
-            content: "(" counter(equation) ")";
-            position: absolute;
-            left: 20px;
-            color: #7f8c8d;
-            font-weight: bold;
-        }
-        
-        .derivation-step {
-            background: rgba(41, 128, 185, 0.05);
+        /* [Previous CSS styles remain unchanged...] */
+
+        .newsletter-box {
+            background: rgba(22, 160, 133, 0.1);
             padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid var(--secondary);
-        }
-        
-        .result {
-            background: rgba(22, 160, 133, 0.08);
-            padding: 25px;
             border-radius: 10px;
-            border: 2px solid var(--accent);
             margin: 40px 0;
             text-align: center;
+            border: 1px dashed var(--accent);
         }
-        
-        .variable {
-            font-weight: bold;
-            color: #c0392b;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .important {
-            background: #fffde7;
-            padding: 3px 8px;
+
+        .newsletter-box input[type="email"] {
+            padding: 10px;
+            width: 70%;
+            margin-right: 10px;
+            border: 1px solid #ddd;
             border-radius: 4px;
-            font-weight: 600;
-            border: 1px solid #ffe082;
         }
-        
-        ul {
-            padding-left: 30px;
-        }
-        
-        li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-        
-        li:before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        
-        #access-notification {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--success);
+
+        .newsletter-box button {
+            padding: 10px 20px;
+            background: var(--accent);
             color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 1000;
-            animation: fadeIn 0.5s ease-out;
-            font-weight: 500;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
+
+        .privacy-notice {
+            font-size: 0.8em;
             color: #7f8c8d;
-            font-size: 0.9em;
-            border-top: 1px solid #eee;
+            margin-top: 10px;
         }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            .section {
-                padding: 15px;
-            }
-            .equation {
-                padding: 12px 15px;
-                font-size: 1em;
-            }
-            #access-notification {
-                bottom: 15px;
-                right: 15px;
-                left: 15px;
-                text-align: center;
-            }
-        }
+
+        /* [Rest of your existing CSS...] */
     </style>
 </head>
 <body>
-    <h1>Complete Derivation of the Compton Effect</h1>
-    
-    <div class="section">
-        <h2>1. Physical Setup</h2>
-        <p>Consider a photon with initial wavelength <span class="variable">λ</span> colliding with a stationary electron (rest mass <span class="variable">m<sub>e</sub></span>). After collision:</p>
-        <ul>
-            <li>Photon is scattered at angle <span class="variable">θ</span> with wavelength <span class="variable">λ'</span></li>
-            <li>Electron recoils at angle <span class="variable">φ</span> with momentum <span class="variable">p<sub>e</sub></span></li>
-        </ul>
-        <p>This interaction demonstrates the <span class="important">particle nature of light</span> while obeying conservation laws.</p>
+    <!-- [Your existing HTML content remains unchanged until the footer...] -->
+
+    <!-- Email Capture Form -->
+    <div class="newsletter-box">
+        <h3>Get the full derivation PDF</h3>
+        <form id="email-capture">
+            <input type="email" placeholder="Your email" required>
+            <button type="submit">Send Me the PDF</button>
+        </form>
+        <p class="privacy-notice">We'll only use your email to send the requested content.</p>
     </div>
 
-    <div class="section">
-        <h2>2. Relativistic Energy of Recoiling Electron</h2>
-        <p>The electron's total energy after collision is given by the relativistic energy-momentum relation:</p>
-        <div class="equation numbered-eq">
-            \[
-            E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2}
-            \]
-        </div>
-        <p>Where:</p>
-        <ul>
-            <li><span class="variable">p<sub>e</sub></span> = electron's momentum after collision</li>
-            <li><span class="variable">m<sub>e</sub></span> = electron rest mass (9.11 × 10<sup>-31</sup> kg)</li>
-            <li><span class="variable">c</span> = speed of light (2.998 × 10<sup>8</sup> m/s)</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>3. Conservation of Energy</h2>
-        
-        <h3>Initial Energy (Before Collision)</h3>
-        <div class="derivation-step">
-            <p>Photon energy: \( E_\gamma = h\nu = \frac{hc}{\lambda} \)</p>
-            <p>Electron energy (at rest): \( E_e = m_e c^2 \)</p>
-            <p><strong>Total initial energy:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                E_{\text{initial}} = \frac{hc}{\lambda} + m_e c^2
-                \]
-            </div>
-        </div>
-        
-        <h3>Final Energy (After Collision)</h3>
-        <div class="derivation-step">
-            <p>Scattered photon energy: \( E_\gamma' = h\nu' = \frac{hc}{\lambda'} \)</p>
-            <p>Recoiling electron energy: \( E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2} \)</p>
-            <p><strong>Total final energy:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                E_{\text{final}} = \frac{hc}{\lambda'} + \sqrt{(p_e c)^2 + (m_e c^2)^2}
-                \]
-            </div>
-        </div>
-        
-        <h3>Energy Conservation Equation</h3>
-        <div class="equation numbered-eq">
-            \[
-            \frac{hc}{\lambda} + m_e c^2 = \frac{hc}{\lambda'} + \sqrt{(p_e c)^2 + (m_e c^2)^2}
-            \]
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>4. Conservation of Momentum</h2>
-        
-        <h3>Initial Momentum</h3>
-        <div class="derivation-step">
-            <p>Photon momentum: \( p_\gamma = \frac{h}{\lambda} \) (along x-axis)</p>
-            <p>Electron momentum (at rest): \( p_e = 0 \)</p>
-        </div>
-        
-        <h3>Final Momentum</h3>
-        <div class="derivation-step">
-            <p>Photon momentum after scattering:</p>
-            <p>\( p_\gamma' = \frac{h}{\lambda'} \) at angle θ</p>
-            <p>Components:</p>
-            <div class="equation">
-                \[
-                p_{\gamma x}' = \frac{h}{\lambda'} \cos \theta \quad \text{(x-component)}
-                \]
-                \[
-                p_{\gamma y}' = \frac{h}{\lambda'} \sin \theta \quad \text{(y-component)}
-                \]
-            </div>
-            
-            <p>Electron momentum: \( p_e \) at angle φ</p>
-            <p>Components:</p>
-            <div class="equation">
-                \[
-                p_{e x} = p_e \cos \phi \quad \text{(x-component)}
-                \]
-                \[
-                p_{e y} = p_e \sin \phi \quad \text{(y-component)}
-                \]
-            </div>
-        </div>
-        
-        <h3>Momentum Conservation Equations</h3>
-        <div class="derivation-step">
-            <p><strong>x-direction:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                \frac{h}{\lambda} = \frac{h}{\lambda'} \cos \theta + p_e \cos \phi
-                \]
-            </div>
-            
-            <p><strong>y-direction:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                0 = \frac{h}{\lambda'} \sin \θ - p_e \sin \phi
-                \]
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>5. Solving the Equations</h2>
-        
-        <h3>Step 1: Solve for p<sub>e</sub></h3>
-        <div class="derivation-step">
-            <p>From y-momentum equation (Eq. 6):</p>
-            <div class="equation">
-                \[
-                p_e \sin \phi = \frac{h}{\lambda'} \sin \θ
-                \]
-            </div>
-            
-            <p>From x-momentum equation (Eq. 5):</p>
-            <div class="equation">
-                \[
-                p_e \cos \phi = \frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ
-                \]
-            </div>
-            
-            <p>Square both equations and add them:</p>
-            <div class="equation">
-                \[
-                p_e^2 \sin^2 \phi + p_e^2 \cos^2 \phi = \left(\frac{h}{\lambda'} \sin \θ\right)^2 + \left(\frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ\right)^2
-                \]
-            </div>
-            
-            <p>Simplify using sin²φ + cos²φ = 1:</p>
-            <div class="equation numbered-eq">
-                \[
-                p_e^2 = \left(\frac{h}{\lambda'}\right)^2 \sin^2 \θ + \left(\frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ\right)^2
-                \]
-            </div>
-            
-            <p>Expand the right side:</p>
-            <div class="equation">
-                \[
-                p_e^2 = \frac{h^2}{\lambda'^2} \sin^2 \θ + \frac{h^2}{\lambda^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ + \frac{h^2}{\lambda'^2} \cos^2 \θ
-                \]
-            </div>
-            
-            <p>Combine terms (sin²θ + cos²θ = 1):</p>
-            <div class="equation numbered-eq">
-                \[
-                p_e^2 = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ
-                \]
-            </div>
-        </div>
-        
-        <h3>Step 2: Relate to Energy Equation</h3>
-        <div class="derivation-step">
-            <p>From energy conservation (Eq. 3):</p>
-            <div class="equation">
-                \[
-                \sqrt{(p_e c)^2 + (m_e c^2)^2} = \frac{hc}{\lambda} - \frac{hc}{\lambda'} + m_e c^2
-                \]
-            </div>
-            
-            <p>Square both sides:</p>
-            <div class="equation">
-                \[
-                (p_e c)^2 + (m_e c^2)^2 = \left(\frac{hc}{\lambda} - \frac{hc}{\lambda'} + m_e c^2\right)^2
-                \]
-            </div>
-            
-            <p>Expand the right side:</p>
-            <div class="equation">
-                \[
-                (p_e c)^2 = \frac{h^2 c^2}{\lambda^2} + \frac{h^2 c^2}{\lambda'^2} - \frac{2h^2 c^2}{\lambda \lambda'} + \frac{2h m_e c^3}{\lambda} - \frac{2h m_e c^3}{\lambda'} + m_e^2 c^4 - m_e^2 c^4
-                \]
-            </div>
-            
-            <p>Simplify:</p>
-            <div class="equation">
-                \[
-                p_e^2 = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Set equal to Eq. 7:</p>
-            <div class="equation">
-                \[
-                \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Cancel common terms:</p>
-            <div class="equation">
-                \[
-                -\frac{2h^2}{\lambda \lambda'} \cos \θ = -\frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Divide both sides by 2h:</p>
-            <div class="equation">
-                \[
-                -\frac{h}{\lambda \lambda'} \cos \θ = -\frac{h}{\lambda \lambda'} + \frac{m_e c}{\lambda} - \frac{m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Multiply through by λλ':</p>
-            <div class="equation">
-                \[
-                -h \cos \θ = -h + m_e c \lambda' - m_e c \lambda
-                \]
-            </div>
-            
-            <p>Rearrange terms:</p>
-            <div class="equation">
-                \[
-                m_e c (\lambda' - \lambda) = h (1 - \cos \θ)
-                \]
-            </div>
-        </div>
-        
-        <div class="result">
-            <h2>Final Result: Compton Wavelength Shift</h2>
-            <div class="equation">
-                \[
-                \boxed{\Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \θ)}
-                \]
-            </div>
-            <p>Where:</p>
-            <ul>
-                <li>\(\frac{h}{m_e c}\) = Compton wavelength of electron ≈ 0.00243 nm</li>
-                <li>θ = scattering angle of photon</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>6. Physical Interpretation</h2>
-        <ul>
-            <li>The wavelength shift depends only on the scattering angle θ</li>
-            <li>Maximum shift occurs at θ = 180° (backscattering): Δλ = 2h/m<sub>e</sub>c ≈ 0.00486 nm</li>
-            <li>No shift occurs at θ = 0° (forward scattering)</li>
-            <li>The electron's recoil energy comes from the photon's energy loss</li>
-        </ul>
-        <p>This effect was first observed by Arthur Compton in 1923 and provided crucial evidence for the particle nature of light.</p>
-    </div>
-
-    <!-- Email Notification System -->
+    <!-- Access Notification -->
     <div id="access-notification">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
@@ -456,114 +105,80 @@
     <footer>
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
-<div class="newsletter-box">
-  <h3>Get the full derivation PDF</h3>
-  <form id="email-capture">
-    <input type="email" placeholder="Your email" required>
-    <button type="submit">Send Me the PDF</button>
-  </form>
-</div>
 
+    <!-- JavaScript -->
+    <script>
+        (function() {
+            // 1. EmailJS Configuration
+            const emailjsConfig = {
+                serviceID: 'service_gfgizng',
+                templateID: 'template_czb8cx7',
+                userID: 'Pd89QT-D1_6ZLaHik'
+            };
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-    (function() {
-        // EmailJS Configuration - Replace with your actual IDs
-        const emailjsConfig = {
-            serviceID: 'service_gfgizng',
-            templateID: 'template_czb8cx7',
-            userID: 'Pd89QT-D1_6ZLaHik'
-        };
+            // 2. Initialize EmailJS
+            emailjs.init(emailjsConfig.userID)
+                .then(() => console.log('EmailJS ready'))
+                .catch(err => console.error('EmailJS init failed:', err));
 
-        // Enhanced data collection with fallbacks
-        async function collectAccessData() {
-            try {
-                // Get approximate location (country-level only for privacy)
-                let location = { country: 'Unknown', city: 'Unknown' };
-                try {
-                    const ipResponse = await fetch('https://ipapi.co/country_name/');
-                    if (ipResponse.ok) location.country = await ipResponse.text();
-                } catch (e) { console.log('Location API failed') }
-
-                return {
-                    // Core access data
+            // 3. Track Page Access
+            function trackAccess() {
+                const accessData = {
                     timestamp: new Date().toLocaleString(),
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                    page_url: window.location.href,
-                    page_title: document.title,
-                    referrer: document.referrer || 'Direct access',
-                    
-                    // Location data
-                    country: location.country,
-                    city: location.city,
-                    
-                    // Device/browser data
-                    device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
-                    os: navigator.platform,
-                    screen_res: `${screen.width}x${screen.height}`,
-                    browser: navigator.userAgent.substring(0, 120), // Truncate long UA strings
-                    
-                    // Technical details
-                    languages: navigator.languages ? navigator.languages.join(', ') : 'Unknown',
-                    cookies: navigator.cookieEnabled ? 'Enabled' : 'Disabled',
-                    dnt: navigator.doNotTrack || 'Not specified'
+                    page: window.location.href,
+                    referrer: document.referrer || 'direct',
+                    device: `${navigator.platform} | ${screen.width}x${screen.height}`,
+                    browser: navigator.userAgent.substring(0, 100)
                 };
-            } catch (error) {
-                console.error('Data collection error:', error);
-                return { error: 'Failed to collect full access data' };
-            }
-        }
 
-        // Improved email sending with error handling
-        async function sendAccessNotification() {
-            try {
-                const accessData = await collectAccessData();
-                
-                await emailjs.init(emailjsConfig.userID);
-                
-                const response = await emailjs.send(
+                emailjs.send(
                     emailjsConfig.serviceID,
                     emailjsConfig.templateID,
                     {
                         to_email: 'sharewendeshw8@gmail.com',
-                        subject: `New Access: ${accessData.page_title}`,
-                        
-                        // Structured data for email template
-                        access_time: accessData.timestamp,
-                        location: `${accessData.city}, ${accessData.country}`,
-                        device: `${accessData.device_type} (${accessData.os})`,
-                        resolution: accessData.screen_res,
-                        browser: accessData.browser,
-                        page_url: accessData.page_url,
-                        referrer: accessData.referrer,
-                        
-                        // Raw data for debugging
-                        raw_data: JSON.stringify(accessData, null, 2)
+                        subject: `New Access: ${document.title}`,
+                        access_data: JSON.stringify(accessData, null, 2)
+                    }
+                ).then(
+                    () => {
+                        console.log('Access logged');
+                        document.getElementById('access-notification').style.display = 'block';
+                        setTimeout(() => {
+                            document.getElementById('access-notification').style.display = 'none';
+                        }, 3000);
+                    },
+                    err => console.error('Access log failed:', err)
+                );
+            }
+
+            // 4. Handle Form Submission
+            document.getElementById('email-capture').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const userEmail = this.querySelector('input').value;
+                
+                emailjs.send(
+                    emailjsConfig.serviceID,
+                    emailjsConfig.templateID,
+                    {
+                        to_email: 'sharewendeshw8@gmail.com',
+                        subject: `New Subscriber: ${userEmail}`,
+                        user_email: userEmail,
+                        message: "Please send the Compton Effect PDF to this email address."
+                    }
+                ).then(
+                    () => alert('PDF request received! Check your email shortly.'),
+                    err => {
+                        console.error('Form submission failed:', err);
+                        alert('Error: Could not process your request.');
                     }
                 );
-                
-                console.log('Access notification sent:', response.status);
-            } catch (error) {
-                console.error('Notification failed:', error);
-                // Consider fallback notification here
-            }
-        }
+            });
 
-        // Start tracking after MathJax loads or page fully loads
-        if (window.MathJax?.startup?.promise) {
-            MathJax.startup.promise.then(sendAccessNotification);
-        } else {
-            window.addEventListener('load', () => setTimeout(sendAccessNotification, 1500));
-        }
-    })();
-
-  document.getElementById('email-capture').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const userEmail = e.target.querySelector('input').value;
-    // Send to your backend/EmailJS
-    console.log('User provided email:', userEmail);
-  });
-</script>
+            // 5. Trigger tracking after page loads
+            window.addEventListener('load', function() {
+                setTimeout(trackAccess, 1000);
+            });
+        })();
+    </script>
 </body>
 </html>
