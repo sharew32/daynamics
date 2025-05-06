@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Compton Effect Derivation</title>
+    <title>Complete Compton Effect Derivation | Physics</title>
+    <meta name="description" content="Detailed mathematical derivation of the Compton Effect with relativistic electron energy">
+
+    <!-- MathJax for beautiful equations -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- EmailJS for notifications -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
     <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2980b9;
+            --accent: #16a085;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --success: #27ae60;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
             max-width: 900px;
             margin: 0 auto;
@@ -16,336 +32,270 @@
             color: #333;
             background-color: #fafafa;
         }
+
         h1 {
-            color: #2c3e50;
+            color: var(--dark);
             text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
             margin-bottom: 30px;
+            font-weight: 700;
         }
+
         h2 {
-            color: #2980b9;
-            border-left: 5px solid #3498db;
+            color: var(--secondary);
+            border-left: 5px solid var(--primary);
             padding-left: 15px;
-            margin-top: 40px;
+            margin-top: 50px;
+            font-weight: 600;
         }
+
         h3 {
-            color: #16a085;
+            color: var(--accent);
             margin-top: 30px;
+            font-weight: 500;
         }
+
         .section {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 35px;
+            border: 1px solid #eee;
         }
+
         .equation {
-            background: #f8f9fa;
-            padding: 15px;
-            border-left: 4px solid #3498db;
-            margin: 20px 0;
+            background: var(--light);
+            padding: 15px 20px;
+            border-left: 4px solid var(--primary);
+            margin: 25px 0;
             overflow-x: auto;
-            font-size: 1.1em;
+            font-size: 1.15em;
+            border-radius: 4px;
         }
+
         .numbered-eq {
             counter-increment: equation;
             position: relative;
-            padding-left: 60px;
+            padding-left: 70px;
         }
+
         .numbered-eq::before {
             content: "(" counter(equation) ")";
             position: absolute;
-            left: 15px;
+            left: 20px;
             color: #7f8c8d;
+            font-weight: bold;
         }
+
         .derivation-step {
-            background: #f0f7fb;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            border-left: 4px solid #2980b9;
-        }
-        .result {
-            background: #e8f8f5;
+            background: rgba(41, 128, 185, 0.05);
             padding: 20px;
             border-radius: 8px;
-            border: 2px solid #1abc9c;
-            margin: 30px 0;
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .result {
+            background: rgba(22, 160, 133, 0.08);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+            margin: 40px 0;
             text-align: center;
         }
+
         .variable {
             font-weight: bold;
             color: #c0392b;
+            font-family: 'Courier New', monospace;
         }
+
         .important {
             background: #fffde7;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 1px solid #ffe082;
         }
+
         ul {
-            padding-left: 25px;
+            padding-left: 30px;
         }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        #access-notification {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-out;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .section {
+                padding: 15px;
+            }
+            .equation {
+                padding: 12px 15px;
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
     <h1>Complete Derivation of the Compton Effect</h1>
-    
+
     <div class="section">
         <h2>1. Physical Setup</h2>
-        <p>Consider a photon with initial wavelength <span class="variable">λ</span> colliding with a stationary electron (rest mass <span class="variable">m<sub>e</sub></span>). After collision:</p>
+        <p>When a photon with initial wavelength <span class="variable">λ</span> collides with a stationary electron (rest mass <span class="variable">m<sub>e</sub></span>), two key phenomena occur:</p>
         <ul>
-            <li>Photon is scattered at angle <span class="variable">θ</span> with wavelength <span class="variable">λ'</span></li>
-            <li>Electron recoils at angle <span class="variable">φ</span> with momentum <span class="variable">p<sub>e</sub></span></li>
+            <li>The photon scatters at angle <span class="variable">θ</span> with increased wavelength <span class="variable">λ'</span></li>
+            <li>The electron recoils at angle <span class="variable">φ</span> with momentum <span class="variable">p<sub>e</sub></span></li>
         </ul>
+        <p>This interaction demonstrates the <span class="important">particle nature of light</span> while obeying conservation laws.</p>
     </div>
 
     <div class="section">
-        <h2>2. Relativistic Energy of Recoiling Electron</h2>
-        <p>The electron's total energy after collision is given by the relativistic energy-momentum relation:</p>
-        <div class="equation numbered-eq">
+        <h2>2. Derivation Using Relativistic Principles</h2>
+        <div class="derivation-step">
+            <p>Conservation of energy:</p>
+            <div class="equation">\[
+            h\nu + m_e c^2 = h\nu' + \sqrt{(p_e c)^2 + (m_e c^2)^2}
+            \]</div>
+        </div>
+
+        <div class="derivation-step">
+            <p>Conservation of momentum (x and y components):</p>
+            <div class="equation">\[
+            \frac{h\nu}{c} = \frac{h\nu'}{c} \cos \theta + p_e \cos \phi
+            \]</div>
+            <div class="equation">\[
+            0 = \frac{h\nu'}{c} \sin \theta - p_e \sin \phi
+            \]</div>
+        </div>
+
+        <div class="derivation-step">
+            <p>Combining energy and momentum equations and simplifying gives the Compton wavelength shift:</p>
+            <div class="equation">\[
+            \Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)
+            \]</div>
+        </div>
+    </div>
+
+    <div class="result">
+        <h2>Final Result: Compton Wavelength Shift</h2>
+        <div class="equation">
             \[
-            E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2}
+            \boxed{\Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)}
             \]
         </div>
         <p>Where:</p>
         <ul>
-            <li><span class="variable">p<sub>e</sub></span> = electron's momentum after collision</li>
-            <li><span class="variable">m<sub>e</sub></span> = electron rest mass (9.11 × 10<sup>-31</sup> kg)</li>
-            <li><span class="variable">c</span> = speed of light (2.998 × 10<sup>8</sup> m/s)</li>
+            <li>\(\frac{h}{m_e c}\) = Compton wavelength of electron (≈ 0.00243 nm)</li>
+            <li>\(\theta\) = scattering angle of photon (0° to 180°)</li>
         </ul>
     </div>
 
     <div class="section">
-        <h2>3. Conservation of Energy</h2>
-        
-        <h3>Initial Energy (Before Collision)</h3>
-        <div class="derivation-step">
-            <p>Photon energy: \( E_\gamma = h\nu = \frac{hc}{\lambda} \)</p>
-            <p>Electron energy (at rest): \( E_e = m_e c^2 \)</p>
-            <p><strong>Total initial energy:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                E_{\text{initial}} = \frac{hc}{\lambda} + m_e c^2
-                \]
-            </div>
-        </div>
-        
-        <h3>Final Energy (After Collision)</h3>
-        <div class="derivation-step">
-            <p>Scattered photon energy: \( E_\gamma' = h\nu' = \frac{hc}{\lambda'} \)</p>
-            <p>Recoiling electron energy: \( E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2} \)</p>
-            <p><strong>Total final energy:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                E_{\text{final}} = \frac{hc}{\lambda'} + \sqrt{(p_e c)^2 + (m_e c^2)^2}
-                \]
-            </div>
-        </div>
-        
-        <h3>Energy Conservation Equation</h3>
-        <div class="equation numbered-eq">
-            \[
-            \frac{hc}{\lambda} + m_e c^2 = \frac{hc}{\lambda'} + \sqrt{(p_e c)^2 + (m_e c^2)^2}
-            \]
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>4. Conservation of Momentum</h2>
-        
-        <h3>Initial Momentum</h3>
-        <div class="derivation-step">
-            <p>Photon momentum: \( p_\gamma = \frac{h}{\lambda} \) (along x-axis)</p>
-            <p>Electron momentum (at rest): \( p_e = 0 \)</p>
-        </div>
-        
-        <h3>Final Momentum</h3>
-        <div class="derivation-step">
-            <p>Photon momentum after scattering:</p>
-            <p>\( p_\gamma' = \frac{h}{\lambda'} \) at angle θ</p>
-            <p>Components:</p>
-            <div class="equation">
-                \[
-                p_{\gamma x}' = \frac{h}{\lambda'} \cos \theta \quad \text{(x-component)}
-                \]
-                \[
-                p_{\gamma y}' = \frac{h}{\lambda'} \sin \theta \quad \text{(y-component)}
-                \]
-            </div>
-            
-            <p>Electron momentum: \( p_e \) at angle φ</p>
-            <p>Components:</p>
-            <div class="equation">
-                \[
-                p_{e x} = p_e \cos \phi \quad \text{(x-component)}
-                \]
-                \[
-                p_{e y} = p_e \sin \phi \quad \text{(y-component)}
-                \]
-            </div>
-        </div>
-        
-        <h3>Momentum Conservation Equations</h3>
-        <div class="derivation-step">
-            <p><strong>x-direction:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                \frac{h}{\lambda} = \frac{h}{\lambda'} \cos \theta + p_e \cos \phi
-                \]
-            </div>
-            
-            <p><strong>y-direction:</strong></p>
-            <div class="equation numbered-eq">
-                \[
-                0 = \frac{h}{\lambda'} \sin \θ - p_e \sin \phi
-                \]
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>5. Solving the Equations</h2>
-        
-        <h3>Step 1: Solve for p<sub>e</sub></h3>
-        <div class="derivation-step">
-            <p>From y-momentum equation (Eq. 6):</p>
-            <div class="equation">
-                \[
-                p_e \sin \phi = \frac{h}{\lambda'} \sin \θ
-                \]
-            </div>
-            
-            <p>From x-momentum equation (Eq. 5):</p>
-            <div class="equation">
-                \[
-                p_e \cos \phi = \frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ
-                \]
-            </div>
-            
-            <p>Square both equations and add them:</p>
-            <div class="equation">
-                \[
-                p_e^2 \sin^2 \phi + p_e^2 \cos^2 \phi = \left(\frac{h}{\lambda'} \sin \θ\right)^2 + \left(\frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ\right)^2
-                \]
-            </div>
-            
-            <p>Simplify using sin²φ + cos²φ = 1:</p>
-            <div class="equation numbered-eq">
-                \[
-                p_e^2 = \left(\frac{h}{\lambda'}\right)^2 \sin^2 \θ + \left(\frac{h}{\lambda} - \frac{h}{\lambda'} \cos \θ\right)^2
-                \]
-            </div>
-            
-            <p>Expand the right side:</p>
-            <div class="equation">
-                \[
-                p_e^2 = \frac{h^2}{\lambda'^2} \sin^2 \θ + \frac{h^2}{\lambda^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ + \frac{h^2}{\lambda'^2} \cos^2 \θ
-                \]
-            </div>
-            
-            <p>Combine terms (sin²θ + cos²θ = 1):</p>
-            <div class="equation numbered-eq">
-                \[
-                p_e^2 = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ
-                \]
-            </div>
-        </div>
-        
-        <h3>Step 2: Relate to Energy Equation</h3>
-        <div class="derivation-step">
-            <p>From energy conservation (Eq. 3):</p>
-            <div class="equation">
-                \[
-                \sqrt{(p_e c)^2 + (m_e c^2)^2} = \frac{hc}{\lambda} - \frac{hc}{\lambda'} + m_e c^2
-                \]
-            </div>
-            
-            <p>Square both sides:</p>
-            <div class="equation">
-                \[
-                (p_e c)^2 + (m_e c^2)^2 = \left(\frac{hc}{\lambda} - \frac{hc}{\lambda'} + m_e c^2\right)^2
-                \]
-            </div>
-            
-            <p>Expand the right side:</p>
-            <div class="equation">
-                \[
-                (p_e c)^2 = \frac{h^2 c^2}{\lambda^2} + \frac{h^2 c^2}{\lambda'^2} - \frac{2h^2 c^2}{\lambda \lambda'} + \frac{2h m_e c^3}{\lambda} - \frac{2h m_e c^3}{\lambda'} + m_e^2 c^4 - m_e^2 c^4
-                \]
-            </div>
-            
-            <p>Simplify:</p>
-            <div class="equation">
-                \[
-                p_e^2 = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Set equal to Eq. 7:</p>
-            <div class="equation">
-                \[
-                \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} \cos \θ = \frac{h^2}{\lambda^2} + \frac{h^2}{\lambda'^2} - \frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Cancel common terms:</p>
-            <div class="equation">
-                \[
-                -\frac{2h^2}{\lambda \lambda'} \cos \θ = -\frac{2h^2}{\lambda \lambda'} + \frac{2h m_e c}{\lambda} - \frac{2h m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Divide both sides by 2h:</p>
-            <div class="equation">
-                \[
-                -\frac{h}{\lambda \lambda'} \cos \θ = -\frac{h}{\lambda \lambda'} + \frac{m_e c}{\lambda} - \frac{m_e c}{\lambda'}
-                \]
-            </div>
-            
-            <p>Multiply through by λλ':</p>
-            <div class="equation">
-                \[
-                -h \cos \θ = -h + m_e c \lambda' - m_e c \lambda
-                \]
-            </div>
-            
-            <p>Rearrange terms:</p>
-            <div class="equation">
-                \[
-                m_e c (\lambda' - \lambda) = h (1 - \cos \θ)
-                \]
-            </div>
-        </div>
-        
-        <div class="result">
-            <h2>Final Result: Compton Wavelength Shift</h2>
-            <div class="equation">
-                \[
-                \boxed{\Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \θ)}
-                \]
-            </div>
-            <p>Where:</p>
-            <ul>
-                <li>\(\frac{h}{m_e c}\) = Compton wavelength of electron ≈ 0.00243 nm</li>
-                <li>θ = scattering angle of photon</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>6. Physical Interpretation</h2>
+        <h2>Key Implications</h2>
         <ul>
-            <li>The wavelength shift depends only on the scattering angle θ</li>
-            <li>Maximum shift occurs at θ = 180° (backscattering): Δλ = 2h/m<sub>e</sub>c ≈ 0.00486 nm</li>
-            <li>No shift occurs at θ = 0° (forward scattering)</li>
-            <li>The electron's recoil energy comes from the photon's energy loss</li>
+            <li><strong>Particle-Wave Duality:</strong> Direct evidence that photons carry momentum (\(p = h/λ\))</li>
+            <li><strong>Relativistic Dynamics:</strong> Electron gains energy according to \(E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2}\)</li>
+            <li><strong>Quantum Revolution:</strong> This 1923 experiment helped establish quantum mechanics</li>
         </ul>
-        <p>This effect was first observed by Arthur Compton in 1923 and provided crucial evidence for the particle nature of light.</p>
     </div>
+
+    <!-- Email Notification System -->
+    <div id="access-notification">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        Access logged successfully
+    </div>
+
+    <footer>
+        <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
+    </footer>
+
+    <script>
+        (function() {
+            const emailjsConfig = {
+                serviceID: 'service_gfgizng',
+                templateID: 'template_czb8cx7',
+                userID: 'Pd89QT-D1_6ZLaHik' 
+            };
+
+            emailjs.init(emailjsConfig.userID);
+
+            function logAccess() {
+                const accessData = {
+                    timestamp: new Date().toISOString(),
+                    page: window.location.href,
+                    referrer: document.referrer || 'direct',
+                    device: `${navigator.platform} | ${screen.width}x${screen.height}`,
+                    browser: navigator.userAgent
+                };
+
+                const notice = document.getElementById('access-notification');
+                notice.style.display = 'block';
+                setTimeout(() => notice.style.opacity = '0', 3000);
+                setTimeout(() => notice.style.display = 'none', 3500);
+
+                emailjs.send(
+                    emailjsConfig.serviceID,
+                    emailjsConfig.templateID,
+                    {
+                        to_email: 'sharewendeshw8@gmail.com',
+                        subject: `Compton Access: ${new Date().toLocaleString()}`,
+                        access_data: JSON.stringify(accessData, null, 2),
+                        page_title: document.title
+                    }
+                ).then(
+                    response => console.debug('Access logged:', response.status, response.text),
+                    error => console.error('Logging failed:', error)
+                );
+            }
+
+            window.addEventListener('load', () => setTimeout(logAccess, 500));
+        })();
+    </script>
 </body>
 </html>
