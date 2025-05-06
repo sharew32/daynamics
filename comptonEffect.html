@@ -255,47 +255,65 @@
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
 
-    <script>
-        (function() {
-            const emailjsConfig = {
-                serviceID: 'service_gfgizng',
-                templateID: 'template_czb8cx7',
-                userID: 'Pd89QT-D1_6ZLaHik' 
-            };
+   <!-- Add a form or input for user name -->
+<div class="section">
+    <h2>Enter Your Name for Access Logging</h2>
+    <input type="text" id="userName" placeholder="Enter your name" required>
+    <button onclick="logAccess()">Log Access</button>
+</div>
 
-            emailjs.init(emailjsConfig.userID);
+<script>
+    (function() {
+        const emailjsConfig = {
+            serviceID: 'service_gfgizng',
+            templateID: 'template_czb8cx7',
+            userID: 'Pd89QT-D1_6ZLaHik' 
+        };
 
-            function logAccess() {
-                const accessData = {
-                    timestamp: new Date().toISOString(),
-                    page: window.location.href,
-                    referrer: document.referrer || 'direct',
-                    device: `${navigator.platform} | ${screen.width}x${screen.height}`,
-                    browser: navigator.userAgent
-                };
+        emailjs.init(emailjsConfig.userID);
 
-                const notice = document.getElementById('access-notification');
-                notice.style.display = 'block';
-                setTimeout(() => notice.style.opacity = '0', 3000);
-                setTimeout(() => notice.style.display = 'none', 3500);
-
-                emailjs.send(
-                    emailjsConfig.serviceID,
-                    emailjsConfig.templateID,
-                    {
-                        to_email: 'sharewendeshw8@gmail.com',
-                        subject: `Compton Access: ${new Date().toLocaleString()}`,
-                        access_data: JSON.stringify(accessData, null, 2),
-                        page_title: document.title
-                    }
-                ).then(
-                    response => console.debug('Access logged:', response.status, response.text),
-                    error => console.error('Logging failed:', error)
-                );
+        function logAccess() {
+            const userName = document.getElementById('userName').value;
+            if (!userName) {
+                alert('Please enter your name!');
+                return;
             }
 
-            window.addEventListener('load', () => setTimeout(logAccess, 500));
-        })();
-    </script>
+            const accessData = {
+                timestamp: new Date().toISOString(),
+                page: window.location.href,
+                referrer: document.referrer || 'direct',
+                device: `${navigator.platform} | ${screen.width}x${screen.height}`,
+                browser: navigator.userAgent,
+                name: userName
+            };
+
+            const notice = document.getElementById('access-notification');
+            notice.style.display = 'block';
+            setTimeout(() => notice.style.opacity = '0', 3000);
+            setTimeout(() => notice.style.display = 'none', 3500);
+
+            // Send email with access data, including the name
+            emailjs.send(
+                emailjsConfig.serviceID,
+                emailjsConfig.templateID,
+                {
+                    to_email: 'sharewendeshw8@gmail.com',
+                    subject: `Compton Access: ${new Date().toLocaleString()}`,
+                    access_data: JSON.stringify(accessData, null, 2),
+                    page_title: document.title,
+                    user_name: accessData.name,
+                    access_time: accessData.timestamp
+                }
+            ).then(
+                response => console.debug('Access logged:', response.status, response.text),
+                error => console.error('Logging failed:', error)
+            );
+        }
+
+        window.addEventListener('load', () => setTimeout(logAccess, 500));
+    })();
+</script>
+
 </body>
 </html>
