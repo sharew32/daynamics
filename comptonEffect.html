@@ -457,62 +457,65 @@
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
 
-    <script>
-        // Initialize EmailJS with your credentials
-        (function() {
-            // Configuration - Replace with your actual IDs
-            const emailjsConfig = {
-                serviceID: 'service_gfgizng', // Your service ID
-                templateID: 'template_czb8cx7', // To be created
-                userID: 'user_Pd89QT-D1_6ZLaHik' // From EmailJS dashboard
+   <script>
+    // Initialize EmailJS with your credentials
+    (function() {
+        // Configuration - Replace with your actual IDs
+        const emailjsConfig = {
+            serviceID: 'service_gfgizng', // Your service ID
+            templateID: 'template_czb8cx7', // Your template ID
+            userID: 'user_Pd89QT-D1_6ZLaHik' // From EmailJS dashboard
+        };
+
+        // Initialize EmailJS
+        emailjs.init(emailjsConfig.userID);
+
+        // Enhanced access logging function
+        function logAccess() {
+            const accessData = {
+                timestamp: new Date().toISOString(),
+                page: window.location.href,
+                referrer: document.referrer || 'direct',
+                device: `${navigator.platform} | ${screen.width}x${screen.height}`,
+                browser: navigator.userAgent,
+                ip: 'Logged by EmailJS' // EmailJS will capture the IP
             };
-            
-            // Initialize EmailJS
-            emailjs.init(emailjsConfig.userID);
-            
-            // Enhanced access logging function
-            function logAccess() {
-                const accessData = {
-                    timestamp: new Date().toISOString(),
-                    page: window.location.href,
-                    referrer: document.referrer || 'direct',
-                    device: `${navigator.platform} | ${screen.width}x${screen.height}`,
-                    browser: navigator.userAgent,
-                    ip: 'Logged by EmailJS' // EmailJS will capture the IP
-                };
-                
-                // Show visual notification
-                const notice = document.getElementById('access-notification');
+
+            // Show visual notification
+            const notice = document.getElementById('access-notification');
+            if (notice) {
                 notice.style.display = 'block';
                 setTimeout(() => {
                     notice.style.opacity = '0';
                     setTimeout(() => notice.style.display = 'none', 500);
                 }, 3000);
-                
-                // Send notification email
-                emailjs.send(
-                    emailjsConfig.serviceID, 
-                    emailjsConfig.templateID,
-                    {
-                        to_email: 'sharewendeshw8@gmail.com',
-                        subject: `Compton Page Access: ${new Date().toLocaleString()}`,
-                        access_data: JSON.stringify(accessData, null, 2),
-                        page_title: document.title,
-                        short_url: window.location.href.replace(/^https?:\/\//, '')
-                    }
-                ).then(
-                    response => console.debug('Access notification sent:', response.status, response.text),
-                    error => console.error('Failed to send notification:', error)
-                );
             }
-            
-            // Wait for MathJax to load before triggering notification
-            if (window.MathJax) {
-                MathJax.startup.promise.then(logAccess);
-            } else {
-                window.addEventListener('load', () => setTimeout(logAccess, 1000));
-            }
-        })();
-    </script>
+
+            // Send notification email
+            emailjs.send(
+                emailjsConfig.serviceID, 
+                emailjsConfig.templateID,
+                {
+                    to_email: 'sharewendeshw8@gmail.com',
+                    subject: `Compton Page Access: ${new Date().toLocaleString()}`,
+                    access_data: JSON.stringify(accessData, null, 2),
+                    page_title: document.title,
+                    short_url: window.location.href.replace(/^https?:\/\//, '')
+                }
+            ).then(
+                response => console.debug('Access notification sent:', response.status, response.text),
+                error => console.error('Failed to send notification:', error)
+            );
+        }
+
+        // Wait for MathJax to load before triggering notification
+        if (window.MathJax) {
+            MathJax.startup.promise.then(logAccess);
+        } else {
+            window.addEventListener('load', () => setTimeout(logAccess, 1000));
+        }
+    })();
+</script>
+
 </body>
 </html>
