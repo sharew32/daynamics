@@ -16,7 +16,39 @@
         window.print();
     }
     </script>
-    <button onclick="printToPDF()">Save as PDF</button>
+    <script src="https://cdn.jsdelivr.net/npm/screenshot-detection@1.0.0/dist/screenshot-detection.min.js"></script>
+    <script>
+    ScreenshotDetection.init({
+        onDetected: function() {
+            alert("Screenshot detected! This content is protected.");
+            document.body.innerHTML = "<h1>Unauthorized screenshot attempt detected</h1>";
+        }
+    });
+    </script>
+    <script>
+        // Makes each copy unique
+        function generateFingerprint() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'rgb(128,0,0)';
+            ctx.fillRect(0,0,10,10);
+            return canvas.toDataURL();
+        }
+        
+        document.body.setAttribute('data-fingerprint', generateFingerprint());
+        </script>
+        <script>
+            // Disable print screen key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "PrintScreen" || 
+                    (e.ctrlKey && e.key === "p") || 
+                    (e.ctrlKey && e.shiftKey && (e.key === "S" || e.key === "s"))) {
+                    e.preventDefault();
+                    alert("Screenshots are not allowed");
+                }
+            });
+            </script>
+    
     
         <style>
         body {
@@ -659,7 +691,7 @@
                 <p style="margin: 5px 0;"><strong>Student</strong></p>
             </div>
         </div>
-        
+        <button onclick="printToPDF()">.</button>
         <div style="margin-top: 30px;">
             <p>This comprehensive guide covers all fundamental aspects of Laplace transforms with detailed examples, proofs, and applications. For further study, consider exploring:</p>
             <ul style="columns: 2; column-gap: 30px;">
@@ -672,7 +704,7 @@
         </div>
         
         <div style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #7f8c8d;">
-            <p>© 2023 Sharew Endeshaw - All Rights Reserved</p>
+            <p>© 2025 Sharew Endeshaw - All Rights Reserved</p>
         </div>
     </div>
 </footer>
