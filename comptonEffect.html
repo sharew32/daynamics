@@ -6,11 +6,6 @@
     <title>Complete Compton Effect Derivation | Physics</title>
     <meta name="description" content="Detailed mathematical derivation of the Compton Effect with relativistic electron energy">
 
-    <!-- MathJax for beautiful equations -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <!-- EmailJS for notifications -->
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
     <style>
@@ -42,20 +37,6 @@
             font-weight: 700;
         }
 
-        h2 {
-            color: var(--secondary);
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            margin-top: 50px;
-            font-weight: 600;
-        }
-
-        h3 {
-            color: var(--accent);
-            margin-top: 30px;
-            font-weight: 500;
-        }
-
         .section {
             background: white;
             padding: 25px;
@@ -63,79 +44,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             margin-bottom: 35px;
             border: 1px solid #eee;
-        }
-
-        .equation {
-            background: var(--light);
-            padding: 15px 20px;
-            border-left: 4px solid var(--primary);
-            margin: 25px 0;
-            overflow-x: auto;
-            font-size: 1.15em;
-            border-radius: 4px;
-        }
-
-        .numbered-eq {
-            counter-increment: equation;
-            position: relative;
-            padding-left: 70px;
-        }
-
-        .numbered-eq::before {
-            content: "(" counter(equation) ")";
-            position: absolute;
-            left: 20px;
-            color: #7f8c8d;
-            font-weight: bold;
-        }
-
-        .derivation-step {
-            background: rgba(41, 128, 185, 0.05);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid var(--secondary);
-        }
-
-        .result {
-            background: rgba(22, 160, 133, 0.08);
-            padding: 25px;
-            border-radius: 10px;
-            border: 2px solid var(--accent);
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .variable {
-            font-weight: bold;
-            color: #c0392b;
-            font-family: 'Courier New', monospace;
-        }
-
-        .important {
-            background: #fffde7;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            border: 1px solid #ffe082;
-        }
-
-        ul {
-            padding-left: 30px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        li:before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
         }
 
         #access-notification {
@@ -165,155 +73,75 @@
             color: #7f8c8d;
             font-size: 0.9em;
         }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            .section {
-                padding: 15px;
-            }
-            .equation {
-                padding: 12px 15px;
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
     <h1>Complete Derivation of the Compton Effect</h1>
 
     <div class="section">
-        <h2>1. Physical Setup</h2>
-        <p>When a photon with initial wavelength <span class="variable">λ</span> collides with a stationary electron (rest mass <span class="variable">m<sub>e</sub></span>), two key phenomena occur:</p>
-        <ul>
-            <li>The photon scatters at angle <span class="variable">θ</span> with increased wavelength <span class="variable">λ'</span></li>
-            <li>The electron recoils at angle <span class="variable">φ</span> with momentum <span class="variable">p<sub>e</sub></span></li>
-        </ul>
-        <p>This interaction demonstrates the <span class="important">particle nature of light</span> while obeying conservation laws.</p>
+        <h2>Enter Your Name for Access Logging</h2>
+        <input type="text" id="userName" placeholder="Enter your name" required>
+        <button onclick="logAccess()">Log Access</button>
     </div>
 
-    <div class="section">
-        <h2>2. Derivation Using Relativistic Principles</h2>
-        <div class="derivation-step">
-            <p>Conservation of energy:</p>
-            <div class="equation">\[
-            h\nu + m_e c^2 = h\nu' + \sqrt{(p_e c)^2 + (m_e c^2)^2}
-            \]</div>
-        </div>
-
-        <div class="derivation-step">
-            <p>Conservation of momentum (x and y components):</p>
-            <div class="equation">\[
-            \frac{h\nu}{c} = \frac{h\nu'}{c} \cos \theta + p_e \cos \phi
-            \]</div>
-            <div class="equation">\[
-            0 = \frac{h\nu'}{c} \sin \theta - p_e \sin \phi
-            \]</div>
-        </div>
-
-        <div class="derivation-step">
-            <p>Combining energy and momentum equations and simplifying gives the Compton wavelength shift:</p>
-            <div class="equation">\[
-            \Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)
-            \]</div>
-        </div>
-    </div>
-
-    <div class="result">
-        <h2>Final Result: Compton Wavelength Shift</h2>
-        <div class="equation">
-            \[
-            \boxed{\Delta \lambda = \lambda' - \lambda = \frac{h}{m_e c} (1 - \cos \theta)}
-            \]
-        </div>
-        <p>Where:</p>
-        <ul>
-            <li>\(\frac{h}{m_e c}\) = Compton wavelength of electron (≈ 0.00243 nm)</li>
-            <li>\(\theta\) = scattering angle of photon (0° to 180°)</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Key Implications</h2>
-        <ul>
-            <li><strong>Particle-Wave Duality:</strong> Direct evidence that photons carry momentum (\(p = h/λ\))</li>
-            <li><strong>Relativistic Dynamics:</strong> Electron gains energy according to \(E_e' = \sqrt{(p_e c)^2 + (m_e c^2)^2}\)</li>
-            <li><strong>Quantum Revolution:</strong> This 1923 experiment helped establish quantum mechanics</li>
-        </ul>
-    </div>
-
-    <!-- Email Notification System -->
     <div id="access-notification">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
-        Access logged successfully
+        Access logged successfully!
     </div>
 
     <footer>
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
 
-   <!-- Add a form or input for user name -->
-<div class="section">
-    <h2>Enter Your Name for Access Logging</h2>
-    <input type="text" id="userName" placeholder="Enter your name" required>
-    <button onclick="logAccess()">Log Access</button>
-</div>
-
-<script>
-    (function() {
-        const emailjsConfig = {
-            serviceID: 'service_gfgizng',
-            templateID: 'template_czb8cx7',
-            userID: 'Pd89QT-D1_6ZLaHik' 
-        };
-
-        emailjs.init(emailjsConfig.userID);
-
-        function logAccess() {
-            const userName = document.getElementById('userName').value;
-            if (!userName) {
-                alert('Please enter your name!');
-                return;
-            }
-
-            const accessData = {
-                timestamp: new Date().toISOString(),
-                page: window.location.href,
-                referrer: document.referrer || 'direct',
-                device: `${navigator.platform} | ${screen.width}x${screen.height}`,
-                browser: navigator.userAgent,
-                name: userName
+    <script>
+        (function() {
+            const emailjsConfig = {
+                serviceID: 'service_gfgizng',   // Replace with your service ID
+                templateID: 'template_czb8cx7', // Replace with your template ID
+                userID: 'Pd89QT-D1_6ZLaHik'     // Replace with your user ID
             };
 
-            const notice = document.getElementById('access-notification');
-            notice.style.display = 'block';
-            setTimeout(() => notice.style.opacity = '0', 3000);
-            setTimeout(() => notice.style.display = 'none', 3500);
+            emailjs.init(emailjsConfig.userID);
 
-            // Send email with access data, including the name
-            emailjs.send(
-                emailjsConfig.serviceID,
-                emailjsConfig.templateID,
-                {
-                    to_email: 'sharewendeshw8@gmail.com',
-                    subject: `Compton Access: ${new Date().toLocaleString()}`,
-                    access_data: JSON.stringify(accessData, null, 2),
-                    page_title: document.title,
-                    user_name: accessData.name,
-                    access_time: accessData.timestamp
+            function logAccess() {
+                const userName = document.getElementById('userName').value;
+                if (!userName) {
+                    alert('Please enter your name!');
+                    return;
                 }
-            ).then(
-                response => console.debug('Access logged:', response.status, response.text),
-                error => console.error('Logging failed:', error)
-            );
-        }
 
-        window.addEventListener('load', () => setTimeout(logAccess, 500));
-    })();
-</script>
+                const accessData = {
+                    timestamp: new Date().toISOString(),
+                    page: window.location.href,
+                    referrer: document.referrer || 'direct',
+                    device: `${navigator.platform} | ${screen.width}x${screen.height}`,
+                    browser: navigator.userAgent,
+                    name: userName
+                };
 
+                const notice = document.getElementById('access-notification');
+                notice.style.display = 'block';
+                setTimeout(() => notice.style.opacity = '0', 3000);
+                setTimeout(() => notice.style.display = 'none', 3500);
+
+                emailjs.send(
+                    emailjsConfig.serviceID,
+                    emailjsConfig.templateID,
+                    {
+                        to_email: 'sharewendeshw8@gmail.com',
+                        subject: `Compton Access: ${new Date().toLocaleString()}`,
+                        access_data: JSON.stringify(accessData, null, 2),
+                        page_title: document.title,
+                        user_name: accessData.name,
+                        access_time: accessData.timestamp
+                    }
+                ).then(
+                    response => console.debug('Access logged:', response.status, response.text),
+                    error => console.error('Logging failed:', error)
+                );
+            }
+
+            window.addEventListener('load', () => setTimeout(logAccess, 500));
+        })();
+    </script>
 </body>
 </html>
