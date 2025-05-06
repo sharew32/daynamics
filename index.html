@@ -86,5 +86,104 @@
         </div>
         <a href="https://sharew32.github.io/department-website/public/index.html" target="_blank" rel="noopener">Other site</a>
     </div>
+    
+<script>
+    (function() {
+        // EmailJS Configuration - Replace with your actual IDs
+        const emailjsConfig = {
+            serviceID: 'service_gfgizng',
+            templateID: 'template_czb8cx7',
+            userID: 'Pd89QT-D1_6ZLaHik'
+        };
+
+        // Enhanced data collection with fallbacks
+        async function collectAccessData() {
+            try {
+                // Get approximate location (country-level only for privacy)
+                let location = { country: 'Unknown', city: 'Unknown' };
+                try {
+                    const ipResponse = await fetch('https://ipapi.co/country_name/');
+                    if (ipResponse.ok) location.country = await ipResponse.text();
+                } catch (e) { console.log('Location API failed') }
+
+                return {
+                    // Core access data
+                    timestamp: new Date().toLocaleString(),
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    page_url: window.location.href,
+                    page_title: document.title,
+                    referrer: document.referrer || 'Direct access',
+                    
+                    // Location data
+                    country: location.country,
+                    city: location.city,
+                    
+                    // Device/browser data
+                    device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                    os: navigator.platform,
+                    screen_res: `${screen.width}x${screen.height}`,
+                    browser: navigator.userAgent.substring(0, 120), // Truncate long UA strings
+                    
+                    // Technical details
+                    languages: navigator.languages ? navigator.languages.join(', ') : 'Unknown',
+                    cookies: navigator.cookieEnabled ? 'Enabled' : 'Disabled',
+                    dnt: navigator.doNotTrack || 'Not specified'
+                };
+            } catch (error) {
+                console.error('Data collection error:', error);
+                return { error: 'Failed to collect full access data' };
+            }
+        }
+
+        // Improved email sending with error handling
+        async function sendAccessNotification() {
+            try {
+                const accessData = await collectAccessData();
+                
+                await emailjs.init(emailjsConfig.userID);
+                
+                const response = await emailjs.send(
+                    emailjsConfig.serviceID,
+                    emailjsConfig.templateID,
+                    {
+                        to_email: 'sharewendeshw8@gmail.com',
+                        subject: `New Access: ${accessData.page_title}`,
+                        
+                        // Structured data for email template
+                        access_time: accessData.timestamp,
+                        location: `${accessData.city}, ${accessData.country}`,
+                        device: `${accessData.device_type} (${accessData.os})`,
+                        resolution: accessData.screen_res,
+                        browser: accessData.browser,
+                        page_url: accessData.page_url,
+                        referrer: accessData.referrer,
+                        
+                        // Raw data for debugging
+                        raw_data: JSON.stringify(accessData, null, 2)
+                    }
+                );
+                
+                console.log('Access notification sent:', response.status);
+            } catch (error) {
+                console.error('Notification failed:', error);
+                // Consider fallback notification here
+            }
+        }
+
+        // Start tracking after MathJax loads or page fully loads
+        if (window.MathJax?.startup?.promise) {
+            MathJax.startup.promise.then(sendAccessNotification);
+        } else {
+            window.addEventListener('load', () => setTimeout(sendAccessNotification, 1500));
+        }
+    })();
+
+  document.getElementById('email-capture').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userEmail = e.target.querySelector('input').value;
+    // Send to your backend/EmailJS
+    console.log('User provided email:', userEmail);
+  });
+</script>
 </body>
 </html>
