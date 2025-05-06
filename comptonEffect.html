@@ -461,115 +461,92 @@
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
     (function() {
-        // EmailJS Configuration
+        // EmailJS Configuration - Replace with your actual IDs
         const emailjsConfig = {
             serviceID: 'service_gfgizng',
             templateID: 'template_czb8cx7',
             userID: 'Pd89QT-D1_6ZLaHik'
         };
 
-        // Initialize EmailJS
-        emailjs.init(emailjsConfig.userID)
-            .then(() => console.log('EmailJS initialized'))
-            .catch(err => console.error('EmailJS init failed:', err));
-
-        // Get approximate location (country-level)
-        async function getLocation() {
+        // Enhanced data collection with fallbacks
+        async function collectAccessData() {
             try {
-                const response = await fetch('https://ipapi.co/json/');
-                if (!response.ok) throw new Error('Location API failed');
-                return await response.json();
-            } catch (error) {
-                console.log('Location detection failed, using fallback');
+                // Get approximate location (country-level only for privacy)
+                let location = { country: 'Unknown', city: 'Unknown' };
+                try {
+                    const ipResponse = await fetch('https://ipapi.co/country_name/');
+                    if (ipResponse.ok) location.country = await ipResponse.text();
+                } catch (e) { console.log('Location API failed') }
+
                 return {
-                    country: 'Unknown',
-                    city: 'Unknown',
-                    ip: 'Not captured'
+                    // Core access data
+                    timestamp: new Date().toLocaleString(),
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    page_url: window.location.href,
+                    page_title: document.title,
+                    referrer: document.referrer || 'Direct access',
+                    
+                    // Location data
+                    country: location.country,
+                    city: location.city,
+                    
+                    // Device/browser data
+                    device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                    os: navigator.platform,
+                    screen_res: `${screen.width}x${screen.height}`,
+                    browser: navigator.userAgent.substring(0, 120), // Truncate long UA strings
+                    
+                    // Technical details
+                    languages: navigator.languages ? navigator.languages.join(', ') : 'Unknown',
+                    cookies: navigator.cookieEnabled ? 'Enabled' : 'Disabled',
+                    dnt: navigator.doNotTrack || 'Not specified'
                 };
+            } catch (error) {
+                console.error('Data collection error:', error);
+                return { error: 'Failed to collect full access data' };
             }
         }
 
-        // Collect detailed access information
-        async function collectAccessData() {
-            const location = await getLocation();
-            
-            return {
-                timestamp: new Date().toLocaleString(),
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                page_url: window.location.href,
-                page_title: document.title,
-                referrer: document.referrer || 'Direct access',
-                
-                // Location data
-                country: location.country_name || 'Unknown',
-                region: location.region || 'Unknown',
-                city: location.city || 'Unknown',
-                approximate_ip: location.ip || 'Not captured',
-                
-                // Device data
-                device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
-                os: navigator.platform,
-                screen_res: `${screen.width}x${screen.height}`,
-                browser: navigator.userAgent.substring(0, 120),
-                
-                // Additional technical details
-                languages: navigator.languages.join(', '),
-                cookies_enabled: navigator.cookieEnabled ? 'Yes' : 'No',
-                do_not_track: navigator.doNotTrack || 'Not specified'
-            };
-        }
-
-        // Send the access notification
+        // Improved email sending with error handling
         async function sendAccessNotification() {
             try {
                 const accessData = await collectAccessData();
                 
-                const templateParams = {
-                    to_email: 'sharewendeshw8@gmail.com',
-                    from_name: 'Compton Effect Monitor',
-                    reply_to: 'no-reply@physics.com',
-                    subject: `New Access from ${accessData.country}`,
-                    
-                    // Organized data for email template
-                    access_time: accessData.timestamp,
-                    timezone: accessData.timezone,
-                    location: `${accessData.city}, ${accessData.region}, ${accessData.country}`,
-                    device: `${accessData.device_type} (${accessData.os})`,
-                    resolution: accessData.screen_res,
-                    browser_info: accessData.browser,
-                    page_accessed: accessData.page_title,
-                    page_url: accessData.page_url,
-                    referrer: accessData.referrer,
-                    languages: accessData.languages,
-                    tracking_consent: accessData.do_not_track,
-                    
-                    // Raw data for debugging
-                    raw_data: JSON.stringify(accessData, null, 2)
-                };
-
-                console.log('Sending access notification with:', templateParams);
+                await emailjs.init(emailjsConfig.userID);
                 
                 const response = await emailjs.send(
                     emailjsConfig.serviceID,
                     emailjsConfig.templateID,
-                    templateParams
+                    {
+                        to_email: 'sharewendeshw8@gmail.com',
+                        subject: `New Access: ${accessData.page_title}`,
+                        
+                        // Structured data for email template
+                        access_time: accessData.timestamp,
+                        location: `${accessData.city}, ${accessData.country}`,
+                        device: `${accessData.device_type} (${accessData.os})`,
+                        resolution: accessData.screen_res,
+                        browser: accessData.browser,
+                        page_url: accessData.page_url,
+                        referrer: accessData.referrer,
+                        
+                        // Raw data for debugging
+                        raw_data: JSON.stringify(accessData, null, 2)
+                    }
                 );
                 
-                console.log('Notification sent successfully:', response.status);
-                return true;
+                console.log('Access notification sent:', response.status);
             } catch (error) {
-                console.error('Failed to send notification:', error);
-                return false;
+                console.error('Notification failed:', error);
+                // Consider fallback notification here
             }
         }
 
-        // Start tracking after page loads
-        if (document.readyState === 'complete') {
-            setTimeout(sendAccessNotification, 1000);
+        // Start tracking after MathJax loads or page fully loads
+        if (window.MathJax?.startup?.promise) {
+            MathJax.startup.promise.then(sendAccessNotification);
         } else {
-            window.addEventListener('load', () => {
-                setTimeout(sendAccessNotification, 1500);
-            });
+            window.addEventListener('load', () => setTimeout(sendAccessNotification, 1500));
         }
     })();
 </script>
