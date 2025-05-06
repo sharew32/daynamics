@@ -49,7 +49,49 @@
             });
             </script>
     
-    
+    <script>
+// Add personalized watermark to each student's copy
+document.addEventListener('DOMContentLoaded', () => {
+  const userID = "1501067" + Math.floor(Math.random() * 10000); // Replace with actual student ID
+  const watermark = document.createElement('div');
+  
+  watermark.innerHTML = `For ${userID} only - © Sharew Endeshaw`;
+  watermark.style.cssText = `
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(255,0,0,0.2);
+    color: red;
+    padding: 10px;
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 9999;
+  `;
+  
+  // Add multiple watermarks
+  for(let i=0; i<5; i++) {
+    const clone = watermark.cloneNode(true);
+    clone.style.transform = `rotate(${i*15}deg)`;
+    clone.style.opacity = 0.3 + (i*0.1);
+    document.body.appendChild(clone);
+  }
+});
+</script>
+    <script>
+// Load content dynamically
+window.onload = async () => {
+  const res = await fetch('encrypted-content.json');
+  const data = await res.json();
+  document.getElementById('content').innerHTML = atob(data.content);
+  
+  // Auto-blur if tab loses focus
+  window.addEventListener('blur', () => {
+    document.body.style.filter = 'blur(5px)';
+  });
+}
+</script>
         <style>
         body {
             
