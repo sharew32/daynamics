@@ -457,46 +457,37 @@
         <p>Compton Effect Derivation © 2023 | sharewendeshw8@gmail.com</p>
     </footer>
 
-   <script>
+  <script>
     // Initialize EmailJS with your credentials
     (function() {
         // Configuration - Replace with your actual IDs
         const emailjsConfig = {
             serviceID: 'service_gfgizng', // Your service ID
             templateID: 'template_czb8cx7', // Your template ID
-            userID: 'user_Pd89QT-D1_6ZLaHik' // From EmailJS dashboard
+            userID: 'Pd89QT-D1_6ZLaHik' // From EmailJS dashboard (Public Key)
         };
 
         // Initialize EmailJS
         emailjs.init(emailjsConfig.userID);
 
-        // Enhanced access logging function
-        function logAccess() {
+        // Function to send email using EmailJS
+        function sendEmail() {
+            // Access Data to be sent
             const accessData = {
                 timestamp: new Date().toISOString(),
                 page: window.location.href,
                 referrer: document.referrer || 'direct',
                 device: `${navigator.platform} | ${screen.width}x${screen.height}`,
                 browser: navigator.userAgent,
-                ip: 'Logged by EmailJS' // EmailJS will capture the IP
+                ip: 'Logged by EmailJS' // EmailJS will capture the IP automatically
             };
 
-            // Show visual notification
-            const notice = document.getElementById('access-notification');
-            if (notice) {
-                notice.style.display = 'block';
-                setTimeout(() => {
-                    notice.style.opacity = '0';
-                    setTimeout(() => notice.style.display = 'none', 500);
-                }, 3000);
-            }
-
-            // Send notification email
+            // Send email
             emailjs.send(
                 emailjsConfig.serviceID, 
                 emailjsConfig.templateID,
                 {
-                    to_email: 'sharewendeshw8@gmail.com',
+                    to_email: 'sharewendeshw8@gmail.com', // Your email address to receive the access info
                     subject: `Compton Page Access: ${new Date().toLocaleString()}`,
                     access_data: JSON.stringify(accessData, null, 2),
                     page_title: document.title,
@@ -508,14 +499,15 @@
             );
         }
 
-        // Wait for MathJax to load before triggering notification
+        // Wait for MathJax to load before triggering the email
         if (window.MathJax) {
-            MathJax.startup.promise.then(logAccess);
+            MathJax.startup.promise.then(sendEmail);
         } else {
-            window.addEventListener('load', () => setTimeout(logAccess, 1000));
+            window.addEventListener('load', () => setTimeout(sendEmail, 1000));
         }
     })();
 </script>
+
 
 </body>
 </html>
