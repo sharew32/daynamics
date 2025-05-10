@@ -1,17 +1,21 @@
 const apiKey = 'YOUR_GOOGLE_API_KEY'; // Replace with your actual Google API key
 
-// Function to translate the content of the page
-function translateContent(targetLang) {
-  // Get all text nodes (could be extended to more complex selection criteria)
-  const elements = document.querySelectorAll('.translatable');
-  elements.forEach((el) => {
-    const originalText = el.innerText;
-    fetchTranslation(originalText, targetLang, el);
+// Function to translate all text nodes within the body
+function translateBodyContent(targetLang) {
+  const bodyTextNodes = document.body.querySelectorAll('*');
+  
+  bodyTextNodes.forEach((element) => {
+    if (element.children.length === 0 && element.innerText.trim()) { // Only translate text nodes (not empty or container elements)
+      const originalText = element.innerText;
+      if (originalText.trim()) {
+        translateText(originalText, targetLang, element);
+      }
+    }
   });
 }
 
-// Fetch translation from Google Translate API
-function fetchTranslation(text, targetLang, element) {
+// Function to get translation from Google Translate API
+function translateText(text, targetLang, element) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
   
   fetch(url, {
@@ -26,7 +30,7 @@ function fetchTranslation(text, targetLang, element) {
   })
   .then((response) => response.json())
   .then((data) => {
-    element.innerText = data.data.translations[0].translatedText;
+    element.innerText = data.data.translations[0].translatedText; // Update text in HTML element
   })
   .catch((error) => {
     console.error('Error translating text:', error);
@@ -35,12 +39,12 @@ function fetchTranslation(text, targetLang, element) {
 
 // Change language and save preference
 function changeLanguage(lang) {
-  localStorage.setItem('lang', lang); // Save preference
-  translateContent(lang); // Translate content
+  localStorage.setItem('lang', lang); // Save the user's language preference
+  translateBodyContent(lang); // Translate all body content
 }
 
 // Auto-apply saved language on page load
 document.addEventListener("DOMContentLoaded", () => {
   const savedLang = localStorage.getItem('lang') || 'en'; // Default to English
-  translateContent(savedLang);
+  translateBodyContent(savedLang); // Translate content to the saved language on page load
 });
