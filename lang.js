@@ -10,10 +10,20 @@ const translations = {
 };
 
 function changeLanguage(lang) {
-  for (const key in translations[lang]) {
-    const element = document.getElementById(key);
-    if (element) {
-      element.innerText = translations[lang][key];
-    }
+  localStorage.setItem('lang', lang); // Save preference
+  applyLanguage(lang);
+}
+
+function applyLanguage(lang) {
+  const data = translations[lang];
+  for (const key in data) {
+    const el = document.getElementById(key);
+    if (el) el.innerText = data[key];
   }
 }
+
+// Auto-run on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedLang = localStorage.getItem('lang') || 'en';
+  applyLanguage(savedLang);
+});
