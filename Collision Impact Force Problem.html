@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision Impact Force Solution</title>
+    <!-- MathJax for beautiful equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .problem-statement {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .step {
+            margin-bottom: 25px;
+        }
+        .final-answer {
+            background-color: #e8f4f8;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .equation {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            overflow-x: auto;
+        }
+        .collision-diagram {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 20px 0;
+            padding: 10px;
+        }
+        .floor {
+            position: absolute;
+            bottom: 50px;
+            width: 90%;
+            left: 5%;
+            height: 2px;
+            background-color: #333;
+        }
+        .mass {
+            position: absolute;
+            bottom: 50px;
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+        }
+        .mass-1 {
+            left: 15%;
+            background-color: #3498db;
+        }
+        .mass-2 {
+            left: 65%;
+            background-color: #e74c3c;
+        }
+        .velocity {
+            position: absolute;
+            font-size: 12px;
+            color: #333;
+        }
+        .velocity-1 {
+            top: 30px;
+            left: 17%;
+        }
+        .velocity-2 {
+            top: 30px;
+            left: 67%;
+        }
+        .arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .arrow-right {
+            border-width: 5px 0 5px 10px;
+            border-color: transparent transparent transparent #333;
+            top: 40px;
+            left: 22%;
+        }
+        .arrow-left {
+            border-width: 5px 10px 5px 0;
+            border-color: transparent #333 transparent transparent;
+            top: 40px;
+            left: 63%;
+        }
+        .parameters {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Collision Impact Force Problem</h1>
+    
+    <div class="problem-statement">
+        <h2>Problem Statement:</h2>
+        <p>The two bodies have the masses and initial velocities shown in the figure. The coefficient of restitution for the collision is \( e = 0.3 \), and friction is negligible. If the time duration of the collision is 0.025 s, determine the average impact force which is exerted on the 3-kg body.</p>
+        
+       
+        
+        <div class="collision-diagram">
+            <div class="floor"></div>
+            
+            <!-- Mass 1 (3kg) -->
+            <div class="mass mass-1">3 kg</div>
+            <div class="velocity velocity-1">0.7 m/s</div>
+            <div class="arrow arrow-right"></div>
+            
+            <!-- Mass 2 (4kg) -->
+            <div class="mass mass-2">4 kg</div>
+            <div class="velocity velocity-2">0.5 m/s</div>
+            <div class="arrow arrow-left"></div>
+            
+            <div style="position: absolute; left: 50%; bottom: 70px; transform: translateX(-50%);">
+                Collision point
+            </div>
+        </div>
+    </div>
+     <div class="parameters">
+            Given parameters:<br>
+            Mass 1: \( m_1 = 3 \, \text{kg} \), Initial velocity: \( v_{1i} = 0.7 \, \text{m/s} \) (→)<br>
+            Mass 2: \( m_2 = 4 \, \text{kg} \), Initial velocity: \( v_{2i} = 0.5 \, \text{m/s} \) (←)<br>
+            Coefficient of restitution: \( e = 0.3 \)<br>
+            Collision duration: \( \Delta t = 0.025 \, \text{s} \)
+        </div>
+    <div class="step">
+        <h2>Step 1: Conservation of Momentum</h2>
+        <p>Apply conservation of momentum (since no external forces act during collision):</p>
+        <div class="equation">
+            \[ m_1v_{1i} + m_2v_{2i} = m_1v_{1f} + m_2v_{2f} \]<br>
+            \[ (3)(0.7) + (4)(-0.5) = 3v_{1f} + 4v_{2f} \]<br>
+            \[ 2.1 - 2.0 = 3v_{1f} + 4v_{2f} \]<br>
+            \[ 0.1 = 3v_{1f} + 4v_{2f} \quad \text{(Equation 1)} \]
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 2: Coefficient of Restitution</h2>
+        <p>The coefficient of restitution relates the relative velocities:</p>
+        <div class="equation">
+            \[ e = \frac{v_{2f} - v_{1f}}{v_{1i} - v_{2i}} \]<br>
+            \[ 0.3 = \frac{v_{2f} - v_{1f}}{0.7 - (-0.5)} \]<br>
+            \[ 0.3 = \frac{v_{2f} - v_{1f}}{1.2} \]<br>
+            \[ v_{2f} - v_{1f} = 0.36 \quad \text{(Equation 2)} \]
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 3: Solve the System of Equations</h2>
+        <p>From Equation 2: \( v_{2f} = v_{1f} + 0.36 \)</p>
+        <p>Substitute into Equation 1:</p>
+        <div class="equation">
+            \[ 0.1 = 3v_{1f} + 4(v_{1f} + 0.36) \]<br>
+            \[ 0.1 = 3v_{1f} + 4v_{1f} + 1.44 \]<br>
+            \[ 0.1 = 7v_{1f} + 1.44 \]<br>
+            \[ 7v_{1f} = -1.34 \]<br>
+            \[ v_{1f} = -0.1914 \, \text{m/s} \]
+        </div>
+        <p>Then from Equation 2:</p>
+        <div class="equation">
+            \[ v_{2f} = -0.1914 + 0.36 = 0.1686 \, \text{m/s} \]
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 4: Calculate Impulse on 3-kg Body</h2>
+        <p>The impulse-momentum theorem gives:</p>
+        <div class="equation">
+            \[ J = \Delta p = m(v_f - v_i) \]<br>
+            For the 3-kg body:<br>
+            \[ J = 3(-0.1914 - 0.7) \]<br>
+            \[ J = 3(-0.8914) \]<br>
+            \[ J = -2.674 \, \text{N·s} \]
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 5: Determine Average Impact Force</h2>
+        <p>Average force is impulse divided by time:</p>
+        <div class="equation">
+            \[ F_{avg} = \frac{J}{\Delta t} = \frac{-2.674}{0.025} \]<br>
+            \[ F_{avg} = -106.96 \, \text{N} \]
+        </div>
+        <p>The negative sign indicates the force opposes the initial motion (acts to the left).</p>
+    </div>
+    
+    <div class="final-answer">
+        <h2>Final Answer:</h2>
+        <p><strong>Average impact force on 3-kg body:</strong> \( \boxed{107 \, \text{N} \, \text{(to the left)}} \)</p>
+    </div>
+</body>
+</html>
