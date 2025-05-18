@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Problems Solutions</title>
+    <!-- MathJax for beautiful equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .problem-container {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .problem-statement {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin-bottom: 20px;
+        }
+        .step {
+            margin-bottom: 25px;
+        }
+        .final-answer {
+            background-color: #e8f4f8;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .equation {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            overflow-x: auto;
+        }
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            margin: 20px 0;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        /* Crate diagram styles */
+        .floor-crate {
+            position: absolute;
+            bottom: 50px;
+            width: 90%;
+            left: 5%;
+            height: 2px;
+            background-color: #333;
+        }
+        .crate {
+            position: absolute;
+            bottom: 50px;
+            left: 20%;
+            width: 80px;
+            height: 60px;
+            background-color: #e67e22;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        .velocity-crate {
+            position: absolute;
+            top: 30px;
+            left: 25%;
+            font-size: 12px;
+        }
+        .arrow-right-crate {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 5px 0 5px 10px;
+            border-color: transparent transparent transparent #333;
+            top: 40px;
+            left: 30%;
+        }
+        .friction-coeff {
+            position: absolute;
+            bottom: 70px;
+            left: 30%;
+            font-size: 12px;
+        }
+        /* Spring diagram styles */
+        .incline {
+            position: absolute;
+            bottom: 50px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background-color: #333;
+            transform: rotate(-20deg);
+            transform-origin: left;
+        }
+        .spring {
+            position: absolute;
+            bottom: 50px;
+            left: 20%;
+            width: 120px;
+            height: 20px;
+            background-color: #9b59b6;
+            transform: rotate(-20deg);
+            transform-origin: left;
+        }
+        .mass-spring {
+            position: absolute;
+            bottom: 30px;
+            left: 35%;
+            width: 60px;
+            height: 60px;
+            background-color: #3498db;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            transform: rotate(-20deg);
+            transform-origin: left;
+        }
+        .x1-marker, .x2-marker {
+            position: absolute;
+            bottom: 30px;
+            font-size: 12px;
+        }
+        .x1-marker {
+            left: 25%;
+        }
+        .x2-marker {
+            left: 45%;
+        }
+        .spring-constant {
+            position: absolute;
+            top: 20px;
+            left: 30%;
+            font-size: 12px;
+        }
+        .angle-marker {
+            position: absolute;
+            bottom: 80px;
+            left: 15%;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            border-top: none;
+            border-right: none;
+        }
+        .angle-label {
+            position: absolute;
+            bottom: 100px;
+            left: 25%;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Physics Problems Solutions</h1>
+
+    <!-- Crate Problem -->
+    <div class="problem-container">
+        <h2>1. Crate Deceleration Problem</h2>
+        
+        <div class="problem-statement">
+            <p>The 50-kg crate is projected along the floor with an initial speed of 7 m/s at \( x = 0 \). The coefficient of kinetic friction is 0.40. Calculate the time required for the crate to come to rest and the corresponding distance \( x \) traveled.</p>
+            
+            <div class="diagram">
+                <div class="floor-crate"></div>
+                <div class="crate">50 kg</div>
+                <div class="velocity-crate">v₀ = 7 m/s</div>
+                <div class="arrow-right-crate"></div>
+                <div class="friction-coeff">μₖ = 0.40</div>
+                <div style="position: absolute; left: 5%; bottom: 60px;">x = 0</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Step 1: Calculate Friction Force</h3>
+            <div class="equation">
+                \[ f_k = \mu_k \cdot N = \mu_k \cdot mg \]<br>
+                \[ f_k = 0.40 \times 50 \times 9.81 = 196.2 \, \text{N} \]
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Step 2: Determine Deceleration</h3>
+            <div class="equation">
+                \[ a = \frac{f_k}{m} = \frac{196.2}{50} = -3.924 \, \text{m/s}^2 \]
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Step 3: Calculate Time to Stop</h3>
+            <div class="equation">
+                \[ v = v_0 + at \]<br>
+                \[ 0 = 7 - 3.924t \]<br>
+                \[ t = \frac{7}{3.924} \approx 1.78 \, \text{s} \]
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Step 4: Calculate Distance Traveled</h3>
+            <div class="equation">
+                \[ x = v_0t + \frac{1}{2}at^2 \]<br>
+                \[ x = 7 \times 1.78 + \frac{1}{2}(-3.924)(1.78)^2 \]<br>
+                \[ x \approx 6.24 \, \text{m} \]
+            </div>
+        </div>
+        
+        <div class="final-answer">
+            <h3>Final Answers:</h3>
+            <p><strong>Time to stop:</strong> \( \boxed{1.78 \, \text{s}} \)</p>
+            <p><strong>Distance traveled:</strong> \( \boxed{6.24 \, \text{m}} \)</p>
+        </div>
+    </div>
+
+    <!-- Spring Problem -->
+    <div class="problem-container">
+        <h2>2. Spring Work Problem</h2>
+        
+        <div class="problem-statement">
+            <p>The spring is unstretched when \( x = 0 \). If the body moves from the initial position \( x_1 = 100 \, \text{mm} \) to the final position \( x_2 = 200 \, \text{mm} \), (a) determine the work done by the spring on the body and (b) determine the work done on the body by its weight.</p>
+            
+            <div class="diagram">
+                <div class="incline"></div>
+                <div class="spring"></div>
+                <div class="mass-spring">7 kg</div>
+                <div class="x1-marker">x₁ = 100 mm</div>
+                <div class="x2-marker">x₂ = 200 mm</div>
+                <div class="spring-constant">k = 4 kN/m</div>
+                <div class="angle-marker"></div>
+                <div class="angle-label">20°</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Part (a): Work Done by Spring</h3>
+            <div class="equation">
+                \[ U_{\text{spring}} = \frac{1}{2}k(x_1^2 - x_2^2) \]<br>
+                \[ U_{\text{spring}} = \frac{1}{2}(4000)(0.1^2 - 0.2^2) \]<br>
+                \[ U_{\text{spring}} = 2000(0.01 - 0.04) = -60 \, \text{J} \]
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3>Part (b): Work Done by Weight</h3>
+            <div class="equation">
+                \[ \Delta x = x_2 - x_1 = 0.1 \, \text{m} \]<br>
+                \[ \Delta y = \Delta x \sin\theta = 0.1 \sin(20°) \approx 0.0342 \, \text{m} \]<br>
+                \[ U_{\text{weight}} = mg\Delta y = 7 \times 9.81 \times 0.0342 \approx 2.35 \, \text{J} \]
+            </div>
+        </div>
+        
+        <div class="final-answer">
+            <h3>Final Answers:</h3>
+            <p><strong>(a) Spring work:</strong> \( \boxed{-60 \, \text{J}} \)</p>
+            <p><strong>(b) Weight work:</strong> \( \boxed{2.35 \, \text{J}} \)</p>
+        </div>
+    </div>
+</body>
+</html>
